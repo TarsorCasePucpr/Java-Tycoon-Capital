@@ -3,6 +3,10 @@
 
 Java-Tycoon-Capital
 Gerard Gabriel Gonzalez Arana
+Kaua Rubbo 
+Bismark Otto 
+
+
 
 
 
