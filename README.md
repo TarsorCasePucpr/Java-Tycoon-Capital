@@ -12,18 +12,6 @@ Jogo *tycoon* em Java, inspirado em *Adventure Capitalist*. O jogador acumula di
 
 ---
 
-## Stack Técnica
-
-| Camada | Tecnologia |
-|--------|-----------|
-| Linguagem | Java 17+ |
-| Interface gráfica | Swing / JavaFX |
-| Persistência | Serialização de objetos + arquivo CSV/TXT |
-| Build | Maven / Gradle (a definir) |
-| Versionamento | Git + GitHub |
-
----
-
 ## Estrutura do Projeto (planejada)
 
 ```
@@ -134,7 +122,7 @@ java -cp out tycoon.Main
 
 ## Convenções
 
-- **Branch:** `main` apenas para versões estáveis; trabalho em `feature/<nome>`.
+- **Branch:** `main` apenas para versões estáveis; trabalho em `develop`.
 - **Commits:** mensagens curtas e descritivas em português.
 - **Code style:** padrão Java (camelCase, PascalCase para classes, UPPER_SNAKE para constantes).
 - **Sem secrets no repositório.**
