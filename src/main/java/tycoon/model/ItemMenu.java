@@ -1,16 +1,10 @@
 package tycoon.model;
 
-// Roadmap de subclases:
-// Lemon (com incremento a cada compra)
-// NewspaperDelivery
-// CarWash
-// PizzaDelivery
-// DonutShop
-// ShrimpBoat
-// HockeyTeam
-// MovieStudio
-// Bank
-// OilCompany
 public abstract class ItemMenu {
+    private abstract int preco_compra;
+    private abstract int quantidade;
+    private abstract int lucro;
+    private abstract int velocidade_producao;
+    public abstract void comprar();
 
 }
