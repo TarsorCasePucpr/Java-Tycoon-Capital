@@ -3,5 +3,5 @@ package tycoon.model;
 //introduce multipliers for items a logica seria ter um multiplier em cada um dos items um valor que possa ser afectado para manter esa logica de multiplicador
 // Multiplicadores tomar en consideracao deixar uma variable para mudar caso o user mude a quantidade pela qual se tem que multiplicar 
 public class Upgrades {
-    
+    public void upgradesItems(){}
 }

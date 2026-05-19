@@ -3,5 +3,9 @@ package tycoon.model;
 // O user vai ter certas coisas desbloqueadas e outras bloqueadas isso vai estar em um arraylist onde vai demostrar quais coisas ele tem e quntas coisas ele tem 
 public class User {
     public long globalmoneyquantity;
-
+    public ArrayList <ItemMenu> Item_User = new ArrayList <>();
+    public ArrayList <Investors> Investors_User =  new ArrayList <>();
+    public ArrayList <Managers> Managers = new ArrayList <>();
+    public ArrayList <Worlds> Worlds_User = new ArrayList <>();
+    
 }
