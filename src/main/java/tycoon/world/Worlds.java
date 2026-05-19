@@ -1,4 +1,4 @@
-package tycoon.model;
+package tycoon.world;
 
 // Option in order to change the world once you reach a certain amount of money ? or level?
 // New items (classes) for new worlds

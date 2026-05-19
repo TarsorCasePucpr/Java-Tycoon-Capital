@@ -1,4 +1,4 @@
-package tycoon.model;
+package tycoon.business;
 
 public class DonutShop extends ItemMenu {
 
