@@ -1,24 +1,17 @@
 package tycoon.model;
 
 public abstract class ItemMenu {
-<<<<<<< HEAD
+    
+    // Preco de compra nao incrementa com a quantidade que uma pessoa compra
+    // Em todo momento ele mostra a quantidade que voce pode comprar baseado na quantidade de dinheiro que voce tem
+    // Logica da compra de certa quantidade de items com funciona investigar
+    
     protected int preco_compra;
     protected int quantidade;
     protected int lucro;
     protected int velocidade_producao;
     protected int tempo_producao;
 
-=======
-    // Preco de compra nao incrementa com a quantidade que uma pessoa compra
-    // Em todo momento ele mostra a quantidade que voce pode comprar baseado na quantidade de dinheiro que voce tem
-    // Logica da compra de certa quantidade de items com funciona investigar
-    
-    private abstract int preco_compra;
-    private abstract int quantidade;
-    private abstract int lucro;
-    private abstract int velocidade_producao;
-    private abstract int tempo_producao;
->>>>>>> 25b0d142ce3783ed40aede22a0924345378867b1
     public ItemMenu(int preco_compra,int quantidade,int lucro,int velocidade_producao,int tempo_producao){
         this.preco_compra = preco_compra;
         this.quantidade = quantidade;
