@@ -1,42 +1,40 @@
-package tycoon.business;
+package tycoon.model;
 
+import tycoon.business.ExcecaoSaldoInsuficiente;
 import tycoon.business.ItemMenu;
+import tycoon.business.User;
 
 public class DonutShop extends ItemMenu {
+
 
     public boolean DonutShopManager = false;
 
     //Construtor CarWash reutiliza o construtor do ItemMenu
-    public DonutShop(int preco_compra,int quantidade,int lucro,int velocidade_producao,int tempo_producao){
-        super(preco_compra,quantidade,lucro,velocidade_producao,tempo_producao);
+
+    private static final int PRECO_COMPRA       = 51840;
+    private static final int QUANTIDADE_INICIAL = 0;
+    private static final int LUCRO              = 9000;
+    private static final int TEMPO_PRODUCAO     = 24;
+
+    // Construtor sem argumentos — valores já definidos
+    public DonutShop() {
+        super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
     }
 
     @Override
-    //Metodo compra do item com ExcecaoSaldoInsuficiente
     public void comprar(User user) throws ExcecaoSaldoInsuficiente {
-
-        //Verificação de saldo insuficiente -> ExcecaoSaldoInsuficiente
-        if(user.globalmoneyquantity < this.preco_compra){
+        if (user.globalmoneyquantity < this.preco_compra) {
             throw new ExcecaoSaldoInsuficiente("Saldo insuficiente!");
         }
 
-        //Calculo da quantidade que pode ser comprada do item (O calculo tem que ser feito o tempo todo em bucle)
-        int quantidadeCompravel = (int)(user.globalmoneyquantity / this.preco_compra);
-
-        //Calculo de quantos é o custo de todos os item (O calculo tem que ser feito o tempo todo em bucle)
+        int quantidadeCompravel = (int) (user.globalmoneyquantity / this.preco_compra);
         long custoTotal = (long) quantidadeCompravel * this.preco_compra;
 
-        //Subtraímos o custo da compra dos items do valor geral que o user têm
         user.globalmoneyquantity -= custoTotal;
-
-        //Atualizamos a quantidade de items que o user possui
         this.quantidade += quantidadeCompravel;
 
-        //Print :-) ------- (Mudar quando implementarmos a intereface) -------
-        System.out.println("Comprou "+ quantidadeCompravel+ " de lava-rápidos");
-
-        //Print :-) ------- (Mudar quando implementarmos a intereface) -------
-        System.out.println("Agora possui "+ this.quantidade);
+        System.out.println("Comprou " + quantidadeCompravel + " Donut's shops");
+        System.out.println("Agora possui " + this.quantidade);
     }
 
     @Override
@@ -53,5 +51,10 @@ public class DonutShop extends ItemMenu {
 
         //Print :-) ------- (Mudar quando implementarmos a intereface) -------
         System.out.println("Recebeu lucro de: "+ this.getLucro());
+    }
+
+    @Override
+    public void reset_cambio_mundo() {
+        this.quantidade = 0;
     }
 }
