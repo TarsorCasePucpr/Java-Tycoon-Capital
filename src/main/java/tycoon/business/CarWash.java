@@ -4,6 +4,8 @@ import tycoon.business.ItemMenu;
 
 public class CarWash extends ItemMenu {
 
+    public boolean CarWashManager = false;
+
     //Construtor CarWash reutiliza o construtor do ItemMenu
     public CarWash(int preco_compra,int quantidade,int lucro,int velocidade_producao,int tempo_producao){
         super(preco_compra,quantidade,lucro,velocidade_producao,tempo_producao);
@@ -42,7 +44,12 @@ public class CarWash extends ItemMenu {
     public void receberLucro(User user){
 
         // Atualizar o dinheiro do usuario sumando a quantidade gerada do item
-        user.globalmoneyquantity += this.getLucro();
+        if (CarWashManager){
+            // Evento de click para que o manager consiga fazer por conta do user 
+            user.globalmoneyquantity += this.getLucro();
+        }else{
+            user.globalmoneyquantity += this.getLucro();
+        }
 
         //Print :-) ------- (Mudar quando implementarmos a intereface) -------
         System.out.println("Recebeu lucro de: "+ this.getLucro());

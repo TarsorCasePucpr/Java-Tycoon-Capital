@@ -37,7 +37,7 @@ public abstract class ItemMenu {
     public int tempo_producao(){
         return this.tempo_producao;
     }
-    public abstract void comprar();
+    public abstract void comprar(User user) throws ExcecaoSaldoInsuficiente;
     public abstract void reset_cambio_mundo();
     
 }
