@@ -1,22 +1,17 @@
-package tycoon.model;
+package tycoon.business;
 
-import tycoon.business.ExcecaoSaldoInsuficiente;
-import tycoon.business.ItemMenu;
-import tycoon.business.User;
+import tycoon.exceptions.ExcecaoSaldoInsuficiente;
+import tycoon.model.User;
 
 public class ShrimpBoat extends ItemMenu {
 
-
     public boolean ShrimpBoatManager = false;
 
-    //Construtor CarWash reutiliza o construtor do ItemMenu
-
-    private static final int PRECO_COMPRA       = 622080;
+    private static final int PRECO_COMPRA = 622080;
     private static final int QUANTIDADE_INICIAL = 0;
-    private static final int LUCRO              = 87000;
-    private static final int TEMPO_PRODUCAO     = 96;
+    private static final int LUCRO = 87000;
+    private static final int TEMPO_PRODUCAO = 96;
 
-    // Construtor sem argumentos — valores já definidos
     public ShrimpBoat() {
         super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
     }
@@ -32,29 +27,20 @@ public class ShrimpBoat extends ItemMenu {
 
         user.globalmoneyquantity -= custoTotal;
         this.quantidade += quantidadeCompravel;
+        ensureProductionStarted();
 
         System.out.println("Comprou " + quantidadeCompravel + " barcos de camarão");
         System.out.println("Agora possui " + this.quantidade);
     }
 
     @Override
-    //Metodo receber lucro do item (Atauliza o dinheiro do usuario sumando a quantidade gerada do item em um periodo de tempo ate o click do User ou ---Manager---)
-    public void receberLucro(User user){
-
-        // Atualizar o dinheiro do usuario sumando a quantidade gerada do item
-        if (ShrimpBoatManager){
-            // Evento de click para que o manager consiga fazer por conta do user 
-            user.globalmoneyquantity += this.getLucro();
-        }else{
-            user.globalmoneyquantity += this.getLucro();
-        }
-
-        //Print :-) ------- (Mudar quando implementarmos a intereface) -------
-        System.out.println("Recebeu lucro de: "+ this.getLucro());
+    public void receberLucro(User user) {
+        super.receberLucro(user);
     }
 
     @Override
     public void reset_cambio_mundo() {
         this.quantidade = 0;
+        this.nextReadyTime = 0;
     }
 }
