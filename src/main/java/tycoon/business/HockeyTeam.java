@@ -5,15 +5,17 @@ import tycoon.model.User;
 
 public class HockeyTeam extends ItemMenu {
 
-    public boolean HockeyTeamManager = false;
-
-    private static final int PRECO_COMPRA = 7464960;
+    private static final int PRECO_COMPRA       = 7464960;
     private static final int QUANTIDADE_INICIAL = 0;
-    private static final int LUCRO = 787000;
-    private static final int TEMPO_PRODUCAO = 384;
+    private static final int LUCRO              = 787000;
+    private static final int TEMPO_PRODUCAO     = 384;
 
     public HockeyTeam() {
         super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+    }
+
+    public void ativarHockeyTeamManager() {
+        this.setManager(true);
     }
 
     @Override
@@ -26,9 +28,9 @@ public class HockeyTeam extends ItemMenu {
         long custoTotal = (long) quantidadeCompravel * this.preco_compra;
 
         user.setMoney(-custoTotal);
+
         this.quantidade += quantidadeCompravel;
         ensureProductionStarted();
-
         System.out.println("Comprou " + quantidadeCompravel + " Times de hockey");
         System.out.println("Agora possui " + this.quantidade);
     }
@@ -42,5 +44,6 @@ public class HockeyTeam extends ItemMenu {
     public void reset_cambio_mundo() {
         this.quantidade = 0;
         this.nextReadyTime = 0;
+        this.managerAtivo = false;
     }
 }

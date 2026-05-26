@@ -5,18 +5,17 @@ import tycoon.model.User;
 
 public class Lemon extends ItemMenu {
 
-    public boolean LemonManager = false;
-    //Construtor CarWash reutiliza o construtor do ItemMenu
-
-
     private static final int PRECO_COMPRA       = 4;
     private static final int QUANTIDADE_INICIAL = 0;
     private static final int LUCRO              = 2;
     private static final int TEMPO_PRODUCAO     = 1;
 
-    // Construtor sem argumentos — valores já definidos
     public Lemon() {
         super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+    }
+
+    public void ativarLemonManager() {
+        this.setManager(true);
     }
 
     @Override
@@ -25,13 +24,14 @@ public class Lemon extends ItemMenu {
             throw new ExcecaoSaldoInsuficiente("Saldo insuficiente!");
         }
 
+
         int quantidadeCompravel = (int) (user.getMoney() / this.preco_compra);
         long custoTotal = (long) quantidadeCompravel * this.preco_compra;
 
         user.setMoney(-custoTotal);
+
         this.quantidade += quantidadeCompravel;
         ensureProductionStarted();
-
         System.out.println("Comprou " + quantidadeCompravel + " limonadas");
         System.out.println("Agora possui " + this.quantidade);
     }
@@ -40,9 +40,11 @@ public class Lemon extends ItemMenu {
     public void receberLucro(User user) {
         super.receberLucro(user);
     }
+
     @Override
     public void reset_cambio_mundo() {
         this.quantidade = 0;
         this.nextReadyTime = 0;
+        this.managerAtivo = false;
     }
 }

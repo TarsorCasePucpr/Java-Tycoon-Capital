@@ -10,6 +10,7 @@ public abstract class ItemMenu {
     protected int lucro;
     protected int tempo_producao;
     protected long nextReadyTime;
+    protected boolean managerAtivo = false;
 
     public ItemMenu(int preco_compra, int quantidade, int lucro, int tempo_producao) {
         this.preco_compra = preco_compra;
@@ -23,11 +24,14 @@ public abstract class ItemMenu {
     public int getQuantidade() { return this.quantidade; }
     public int getLucro() { return this.lucro * this.quantidade; }
     public int getTempo() { return this.tempo_producao; }
+    public boolean isManagerAtivo() { return this.managerAtivo; }
+
+    public void setManager(boolean ativo) {
+        this.managerAtivo = ativo;
+    }
 
     public void startProduction() {
-        if (this.quantidade <= 0) {
-            return;
-        }
+        if (this.quantidade <= 0) return;
         this.nextReadyTime = System.currentTimeMillis() + this.tempo_producao * 1000L;
     }
 
@@ -56,13 +60,21 @@ public abstract class ItemMenu {
         }
 
         if (!isReady()) {
-            System.out.println("Ainda não pronto. Falta " + timeRemainingSeconds() + " segundos.");
+            if (!managerAtivo) {
+                System.out.println("Ainda não pronto. Falta " + timeRemainingSeconds() + " segundos.");
+            }
             return;
         }
 
         user.setMoney(this.getLucro());
         System.out.println("Recebeu lucro de: " + this.getLucro());
         startProduction();
+    }
+//implementar automatização
+    public void tickManager(User user) {
+        if (this.managerAtivo) {
+            receberLucro(user);
+        }
     }
 
     public abstract void comprar(User user) throws ExcecaoSaldoInsuficiente;

@@ -5,15 +5,17 @@ import tycoon.model.User;
 
 public class NewspaperDelivery extends ItemMenu {
 
-    public boolean NewspaperDeliveryManager = false;
-
-    private static final int PRECO_COMPRA = 60;
+    private static final int PRECO_COMPRA       = 60;
     private static final int QUANTIDADE_INICIAL = 0;
-    private static final int LUCRO = 10;
-    private static final int TEMPO_PRODUCAO = 3;
+    private static final int LUCRO              = 10;
+    private static final int TEMPO_PRODUCAO     = 3;
 
     public NewspaperDelivery() {
         super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+    }
+
+    public void ativarNewspaperDeliveryManager() {
+        this.setManager(true);
     }
 
     @Override
@@ -22,13 +24,14 @@ public class NewspaperDelivery extends ItemMenu {
             throw new ExcecaoSaldoInsuficiente("Saldo insuficiente!");
         }
 
+
         int quantidadeCompravel = (int) (user.getMoney() / this.preco_compra);
         long custoTotal = (long) quantidadeCompravel * this.preco_compra;
 
         user.setMoney(-custoTotal);
+
         this.quantidade += quantidadeCompravel;
         ensureProductionStarted();
-
         System.out.println("Comprou " + quantidadeCompravel + " bancas");
         System.out.println("Agora possui " + this.quantidade);
     }
@@ -42,5 +45,6 @@ public class NewspaperDelivery extends ItemMenu {
     public void reset_cambio_mundo() {
         this.quantidade = 0;
         this.nextReadyTime = 0;
+        this.managerAtivo = false;
     }
 }

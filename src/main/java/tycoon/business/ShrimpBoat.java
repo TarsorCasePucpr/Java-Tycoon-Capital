@@ -5,15 +5,17 @@ import tycoon.model.User;
 
 public class ShrimpBoat extends ItemMenu {
 
-    public boolean ShrimpBoatManager = false;
-
-    private static final int PRECO_COMPRA = 622080;
+    private static final int PRECO_COMPRA       = 622080;
     private static final int QUANTIDADE_INICIAL = 0;
-    private static final int LUCRO = 87000;
-    private static final int TEMPO_PRODUCAO = 96;
+    private static final int LUCRO              = 87000;
+    private static final int TEMPO_PRODUCAO     = 96;
 
     public ShrimpBoat() {
         super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+    }
+
+    public void ativarShrimpBoatManager() {
+        this.setManager(true);
     }
 
     @Override
@@ -22,13 +24,13 @@ public class ShrimpBoat extends ItemMenu {
             throw new ExcecaoSaldoInsuficiente("Saldo insuficiente!");
         }
 
+
         int quantidadeCompravel = (int) (user.getMoney() / this.preco_compra);
         long custoTotal = (long) quantidadeCompravel * this.preco_compra;
 
         user.setMoney(-custoTotal);
         this.quantidade += quantidadeCompravel;
         ensureProductionStarted();
-
         System.out.println("Comprou " + quantidadeCompravel + " barcos de camarão");
         System.out.println("Agora possui " + this.quantidade);
     }
@@ -42,5 +44,6 @@ public class ShrimpBoat extends ItemMenu {
     public void reset_cambio_mundo() {
         this.quantidade = 0;
         this.nextReadyTime = 0;
+        this.managerAtivo = false;
     }
 }
