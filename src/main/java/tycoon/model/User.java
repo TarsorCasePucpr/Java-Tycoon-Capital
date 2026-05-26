@@ -12,4 +12,13 @@ public class User {
     private ArrayList<Investors> investors = new ArrayList<>();
     private ArrayList<Managers> managers = new ArrayList<>();
     private ArrayList<Worlds> currentWorld = new ArrayList<>();
+
+    public void setMoney(long amount){
+        this.globalMoneyQuantity += amount;
+    }
+
+    public long getMoney(){
+        return globalMoneyQuantity;
+    }
+    
 }

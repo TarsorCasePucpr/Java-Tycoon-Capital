@@ -18,14 +18,14 @@ public class ShrimpBoat extends ItemMenu {
 
     @Override
     public void comprar(User user) throws ExcecaoSaldoInsuficiente {
-        if (user.globalmoneyquantity < this.preco_compra) {
+        if (user.getMoney() < this.preco_compra) {
             throw new ExcecaoSaldoInsuficiente("Saldo insuficiente!");
         }
 
-        int quantidadeCompravel = (int) (user.globalmoneyquantity / this.preco_compra);
+        int quantidadeCompravel = (int) (user.getMoney() / this.preco_compra);
         long custoTotal = (long) quantidadeCompravel * this.preco_compra;
 
-        user.globalmoneyquantity -= custoTotal;
+        user.setMoney(-custoTotal);
         this.quantidade += quantidadeCompravel;
         ensureProductionStarted();
 

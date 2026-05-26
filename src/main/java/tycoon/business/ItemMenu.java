@@ -60,7 +60,7 @@ public abstract class ItemMenu {
             return;
         }
 
-        user.globalmoneyquantity += this.getLucro();
+        user.setMoney(this.getLucro());
         System.out.println("Recebeu lucro de: " + this.getLucro());
         startProduction();
     }
