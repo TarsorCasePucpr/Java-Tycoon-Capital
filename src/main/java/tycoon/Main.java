@@ -1,7 +1,9 @@
 package tycoon;
-// Implment class rewards it gives multipliers for items teriam que verificar como implmentar porem e uma mesma 
+
+import tycoon.view.ViewItemMenu;
+
 public class Main {
     public static void main(String[] args) {
-        
+        ViewItemMenu.abrir();
     }
 }

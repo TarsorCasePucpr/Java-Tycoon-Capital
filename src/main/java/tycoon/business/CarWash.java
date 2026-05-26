@@ -1,4 +1,4 @@
-package tycoon.business;
+2package tycoon.business;
 
 import tycoon.exceptions.ExcecaoSaldoInsuficiente;
 import tycoon.model.User;
