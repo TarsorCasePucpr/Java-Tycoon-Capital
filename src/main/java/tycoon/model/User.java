@@ -1,11 +1,15 @@
 package tycoon.model;
-// Como nos vamos organizar os items desbloqueados e bloqueados e a quantidade de cada item? tambem onde validar isso 
-// O user vai ter certas coisas desbloqueadas e outras bloqueadas isso vai estar em um arraylist onde vai demostrar quais coisas ele tem e quntas coisas ele tem 
+
+import java.util.ArrayList;
+import tycoon.business.ItemMenu;
+import tycoon.progression.Investors;
+import tycoon.progression.Managers;
+import tycoon.world.Worlds;
+
 public class User {
-    public long globalmoneyquantity;
-    public ArrayList <ItemMenu> Item_User = new ArrayList <>();
-    public ArrayList <Investors> Investors_User =  new ArrayList <>();
-    public ArrayList <Managers> Managers = new ArrayList <>();
-    public ArrayList <Worlds> Worlds_User = new ArrayList <>();
-    
+    private long globalMoneyQuantity;
+    private ArrayList<ItemMenu> items = new ArrayList<>();
+    private ArrayList<Investors> investors = new ArrayList<>();
+    private ArrayList<Managers> managers = new ArrayList<>();
+    private ArrayList<Worlds> currentWorld = new ArrayList<>();
 }
