@@ -13,14 +13,38 @@ public class User implements Serializable {
     private ArrayList<ItemMenu> items = new ArrayList<>();
     private ArrayList<Investors> investors = new ArrayList<>();
     private ArrayList<Managers> managers = new ArrayList<>();
-    private ArrayList<Worlds> currentWorld = new ArrayList<>();
+    private Worlds currentWorld;
 
-    public void setMoney(long amount){
+    public void setMoney(long amount) {
         this.globalMoneyQuantity += amount;
     }
 
-    public long getMoney(){
+    public long getMoney() {
         return globalMoneyQuantity;
     }
-    
+
+    public void addItem(ItemMenu item) {
+        this.items.add(item);
+    }
+
+    public ArrayList<ItemMenu> getItems() {
+        return items;
+    }
+
+    public ArrayList<Investors> getInvestors() {
+        return investors;
+    }
+
+    public ArrayList<Managers> getManagers() {
+        return managers;
+    }
+
+    public Worlds getCurrentWorld() {
+        return currentWorld;
+    }
+
+    public void setCurrentWorld(Worlds world) {
+        this.currentWorld = world;
+    }
+
 }
