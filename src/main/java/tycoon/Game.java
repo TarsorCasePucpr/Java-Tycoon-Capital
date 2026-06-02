@@ -24,7 +24,8 @@ public class Game {
     private void update() {
         for (ItemMenu item : user.getItems()) {
             if (item.isReady()) {
-                user.addMoney(item.getLucro());
+                //Implment logic of bottom press or manager automation --10 seconds-- do not exist
+                //user.addMoney(item.getLucro());
                 item.startProduction();
             }
         }
