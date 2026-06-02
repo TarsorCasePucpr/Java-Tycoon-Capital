@@ -1,51 +1,55 @@
 package tycoon.view;
 
-import java.awt.Dimension;
+import java.awt.*;
 import javax.swing.*;
 import tycoon.Game;
+import tycoon.business.ItemMenu;
 import tycoon.model.User;
 
 public class ViewItemMenu {
 
     private JFrame janela;
+    private User user;
+    private Game game;
+    private JLabel labelSaldo;
 
     public void show() {
-        User user = new User();
-        Game game = new Game(user);
-        game.start();
-
-        janela = new JFrame("Java Tycoon Capital");
-        janela.setSize(300, 150);
+        user = new User();
+        game = new Game(user);
+        
         janela = new JFrame("Java Tycoon Capital");
         janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        janela.setSize(1280, 720);
+        janela.setLayout(new BorderLayout());
 
-        JLabel label = new JLabel("Olá");
-        JPanel painel = new JPanel(null);
-        painel.add(label);
+        // Painel topo — saldo
+        JPanel painelTopo = new JPanel();
+        labelSaldo = new JLabel("$0");
+        labelSaldo.setFont(new Font("Arial", Font.BOLD, 24));
+        painelTopo.add(labelSaldo);
+        janela.add(painelTopo, BorderLayout.NORTH);
 
-        Dimension dimensao = label.getPreferredSize();
-        label.setBounds(300 / 2, 150 / 2, dimensao.width, dimensao.height);
+        // Painel centro — lojas
+        JPanel painelCentro = new JPanel();
+        painelCentro.add(new JLabel("Lojas virão aqui"));
+        janela.add(painelCentro, BorderLayout.CENTER);
 
-        // Item1
-        // Vai variar baseado na quantidade que o user pode comprar isso vai ter que
-        // mudar o tempo todo (Buy x1).
-        JButton botao1 = new JButton("Buy x1");
-        int larguraBotao = 90;
-        int alturaBotao = 30;
-        int x = (janela.getWidth() - larguraBotao) / 2;
-        int y = (janela.getHeight() - alturaBotao) / 2;
-        botao1.setBounds(
-                x, y,
-                larguraBotao,
-                alturaBotao);
-        painel.add(botao1);
+        // Painel lateral — menu esquerdo (Shop, Connect...)
+        JPanel painelLateral = new JPanel();
+        painelLateral.setPreferredSize(new Dimension(150, 720));
+        painelLateral.setBackground(Color.DARK_GRAY);
+        janela.add(painelLateral, BorderLayout.WEST);
 
-        // Item1
-        JButton botaoFechar = new JButton("Fechar");
+        for (ItemMenu item : user.getItems()) {
+            painelCentro.add(new ViewCardShop(item));
+        }
 
-        janela.add(painel);
-        janela.setSize(300, 150);
         janela.setVisible(true);
+        game.start();
+    }
+
+    public void atualizarSaldo() {
+        labelSaldo.setText("$" + user.getMoney());
     }
 
     public static void abrir() {

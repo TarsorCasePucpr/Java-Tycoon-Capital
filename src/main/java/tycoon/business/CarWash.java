@@ -11,7 +11,7 @@ public class CarWash extends ItemMenu {
     private static final int TEMPO_PRODUCAO     = 6;
 
     public CarWash() {
-        super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+        super("Car Wash", PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
     }
 
     public void ativarCarWashManager() {

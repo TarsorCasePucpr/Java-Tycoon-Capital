@@ -11,7 +11,7 @@ public class PizzaDelivery extends ItemMenu {
     private static final int TEMPO_PRODUCAO     = 12;
 
     public PizzaDelivery() {
-        super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+        super("Pizza Delivery", PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
     }
 
     public void ativarPizzaDeliveryManager() {

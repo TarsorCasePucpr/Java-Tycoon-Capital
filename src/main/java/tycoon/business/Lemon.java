@@ -11,7 +11,7 @@ public class Lemon extends ItemMenu {
     private static final int TEMPO_PRODUCAO     = 1;
 
     public Lemon() {
-        super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+        super("Lemon", PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
     }
 
     public void ativarLemonManager() {

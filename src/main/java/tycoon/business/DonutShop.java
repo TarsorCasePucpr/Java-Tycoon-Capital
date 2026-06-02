@@ -11,7 +11,7 @@ public class DonutShop extends ItemMenu {
     private static final int TEMPO_PRODUCAO     = 24;
 
     public DonutShop() {
-        super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+        super("Donut Shop", PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
     }
 
     public void ativarDonutShopManager() {

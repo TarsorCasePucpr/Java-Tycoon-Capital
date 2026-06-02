@@ -4,7 +4,7 @@ import tycoon.exceptions.ExcecaoSaldoInsuficiente;
 import tycoon.model.User;
 
 public abstract class ItemMenu {
-
+    protected String nome;
     protected int preco_compra;
     protected int quantidade;
     protected int lucro;
@@ -12,7 +12,8 @@ public abstract class ItemMenu {
     protected long nextReadyTime;
     protected boolean managerAtivo = false;
 
-    public ItemMenu(int preco_compra, int quantidade, int lucro, int tempo_producao) {
+    public ItemMenu(String nome, int preco_compra, int quantidade, int lucro, int tempo_producao) {
+        this.nome = nome;
         this.preco_compra = preco_compra;
         this.quantidade = quantidade;
         this.lucro = lucro;
@@ -20,6 +21,7 @@ public abstract class ItemMenu {
         this.nextReadyTime = 0;
     }
 
+    public String getNome() { return this.nome; }
     public int getPrecoCompra() { return this.preco_compra; }
     public int getQuantidade() { return this.quantidade; }
     public int getLucro() { return this.lucro * this.quantidade; }

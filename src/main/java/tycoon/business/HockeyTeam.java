@@ -11,7 +11,7 @@ public class HockeyTeam extends ItemMenu {
     private static final int TEMPO_PRODUCAO     = 384;
 
     public HockeyTeam() {
-        super(PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
+        super("Hockey Team", PRECO_COMPRA, QUANTIDADE_INICIAL, LUCRO, TEMPO_PRODUCAO);
     }
 
     public void ativarHockeyTeamManager() {
