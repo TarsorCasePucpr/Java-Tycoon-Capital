@@ -68,8 +68,9 @@ public abstract class ItemMenu {
             return;
         }
 
-        user.setMoney(this.getLucro());
-        System.out.println("Recebeu lucro de: " + this.getLucro());
+        long lucroComMultiplicador = (long) (this.getLucro() * user.getInvestorMultiplier());
+        user.setMoney(lucroComMultiplicador);
+        System.out.println("Recebeu lucro de: " + lucroComMultiplicador);
         startProduction();
     }
 //implementar automatização

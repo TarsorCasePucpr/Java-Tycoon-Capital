@@ -19,8 +19,25 @@ public class User implements Serializable {
         this.globalMoneyQuantity += amount;
     }
 
+    
+    public void setMoney(long delta) {
+        this.globalMoneyQuantity += delta;
+    }
+
+    public void resetMoney() {
+        this.globalMoneyQuantity = 0;
+    }
+
     public long getMoney() {
         return globalMoneyQuantity;
+    }
+
+    public void addInvestor(Investors investor) {
+        this.investors.add(investor);
+    }
+
+    public double getInvestorMultiplier() {
+        return Investors.calculateMultiplier(investors.size());
     }
 
     public void addItem(ItemMenu item) {
