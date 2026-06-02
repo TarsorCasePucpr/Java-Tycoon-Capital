@@ -15,7 +15,7 @@ public class User implements Serializable {
     private ArrayList<Managers> managers = new ArrayList<>();
     private Worlds currentWorld;
 
-    public void setMoney(long amount) {
+    public void addMoney(long amount) {
         this.globalMoneyQuantity += amount;
     }
 

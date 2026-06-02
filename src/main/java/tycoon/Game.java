@@ -24,7 +24,7 @@ public class Game {
     private void update() {
         for (ItemMenu item : user.getItems()) {
             if (item.isReady()) {
-                user.setMoney(item.getLucro());
+                user.addMoney(item.getLucro());
                 item.startProduction();
             }
         }
