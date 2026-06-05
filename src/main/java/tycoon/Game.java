@@ -14,19 +14,24 @@ import tycoon.model.User;
 public class Game {
     private User user;
     private Timer gameLoop;
+    private Runnable onMoneyChanged;
 
-    private void inicializarLojas() {
-        user.addItem(new CarWash());
-        user.addItem(new DonutShop());
-        user.addItem(new HockeyTeam());
+    public void inicializarLojas() {
         user.addItem(new Lemon());
         user.addItem(new NewspaperDelivery());
+        user.addItem(new CarWash());
         user.addItem(new PizzaDelivery());
+        user.addItem(new DonutShop());
         user.addItem(new ShrimpBoat());
+        user.addItem(new HockeyTeam());
     }
 
     public Game(User user) {
         this.user = user;
+    }
+
+    public void setOnMoneyChangedListener(Runnable listener) {
+        this.onMoneyChanged = listener;
     }
 
     public void start() {
@@ -40,13 +45,14 @@ public class Game {
     }
 
     private void update() {
+        long moneyBefore = user.getMoney();
+
         for (ItemMenu item : user.getItems()) {
-            if (item.isReady()) {
-                //Implment logic of bottom press or manager automation --10 seconds-- do not exist
-                //user.addMoney(item.getLucro());
-                item.startProduction();
-            }
+            item.tickManager(user);
         }
-        System.out.println("Saldo: " + user.getMoney());
+
+        if (user.getMoney() != moneyBefore && onMoneyChanged != null) {
+            onMoneyChanged.run();
+        }
     }
 }

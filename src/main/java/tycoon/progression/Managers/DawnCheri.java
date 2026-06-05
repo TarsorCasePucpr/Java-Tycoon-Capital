@@ -1,18 +1,23 @@
-// Items Afetados CARWASH e DONUTSHOP
-
-
 package tycoon.progression;
-import tycoon.progression.Managers;
-// Keep earning money even if you are offline — maybe implement, faz sentido?
-// Runs the clicking actions for you 
+
+import tycoon.business.ItemMenu;
+import tycoon.business.CarWash;
+import tycoon.business.DonutShop;
+
 public class DawnCheri extends Managers {
-    private int value_manager = 10000;
-    private void action(ItemMenu item){
-        if(item instanceof CarWash){
-            CarWashManager = true;
+    private static final int PRECO = 10000;
+
+    public DawnCheri() {
+        super("Dawn Cheri", PRECO);
+    }
+
+    @Override
+    public void action(ItemMenu item) {
+        if (item instanceof CarWash) {
+            item.setManager(true);
         }
-        if(item instanceof DonutShop){
-            DonutShopManager = true;
+        if (item instanceof DonutShop) {
+            item.setManager(true);
         }
     }
 }

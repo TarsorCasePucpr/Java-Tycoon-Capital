@@ -1,15 +1,19 @@
-// Items Afetados SHRIMPBOAT
-
-
 package tycoon.progression;
-import tycoon.progression.Managers;
-// Keep earning money even if you are offline — maybe implement, faz sentido?
-// Runs the clicking actions for you 
+
+import tycoon.business.ItemMenu;
+import tycoon.business.ShrimpBoat;
+
 public class MamaSean extends Managers {
-    private int value_manager = 100000;
-    private void action(ItemMenu item){
-        if(item instanceof ShrimpBoat){
-            ShrimpBoatManager = true;
+    private static final int PRECO = 100000;
+
+    public MamaSean() {
+        super("Mama Sean", PRECO);
+    }
+
+    @Override
+    public void action(ItemMenu item) {
+        if (item instanceof ShrimpBoat) {
+            item.setManager(true);
         }
     }
 }

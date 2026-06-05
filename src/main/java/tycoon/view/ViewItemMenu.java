@@ -11,64 +11,210 @@ import tycoon.persistence.Persistence;
 
 public class ViewItemMenu {
 
+    private static final Color BG_MAIN    = new Color(24, 40, 24);    
+    private static final Color BG_SIDEBAR = new Color(15, 28, 15);    
+    private static final Color BTN_MENU   = new Color(55, 90, 55);    
+    private static final Color BTN_SHOP   = new Color(190, 145, 30);  
+    private static final Color BTN_LAUNCH = new Color(85, 170, 51);
+    private static final Color TXT_CREAM  = new Color(255, 244, 213); 
+    private static final Color TXT_GOLD   = new Color(245, 197, 24);  
+    private static final Color TXT_DARK   = new Color(15, 28, 15);
+
     private JFrame janela;
     private User user;
     private Game game;
     private JLabel labelSaldo;
+    private int[] buyMode = {1};
+    private JButton[] buyModeButtons;
 
     public void show() {
         user = new User();
         game = new Game(user);
+        game.inicializarLojas();
 
         janela = new JFrame("Java Tycoon Capital");
-        
         janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        janela.setSize(1100, 720);
+        janela.setLocationRelativeTo(null);
+        janela.getContentPane().setBackground(BG_MAIN);
+
         janela.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                try {
-                    Persistence.saveUser(user, "user.dat");
-                    System.out.println("User salvo em: user.dat");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } finally {
-                    janela.dispose();
-                    System.exit(0);
-                }
+            @Override public void windowClosing(WindowEvent e) {
+                game.stop();
+                try { Persistence.saveUser(user, "user.dat"); }
+                catch (IOException ex) { ex.printStackTrace(); }
+                finally { janela.dispose(); System.exit(0); }
             }
         });
 
-        janela.setSize(1280, 720);
-        janela.setLayout(new BorderLayout());
-
-        // Painel topo — saldo
-        JPanel painelTopo = new JPanel();
-        labelSaldo = new JLabel("$0");
-        labelSaldo.setFont(new Font("Arial", Font.BOLD, 24));
-        painelTopo.add(labelSaldo);
-        janela.add(painelTopo, BorderLayout.NORTH);
-
-        // Painel centro — lojas
-        JPanel painelCentro = new JPanel();
-        painelCentro.add(new JLabel("Lojas virão aqui"));
-        janela.add(painelCentro, BorderLayout.CENTER);
-
-        // Painel lateral — menu esquerdo
-        JPanel painelLateral = new JPanel();
-        painelLateral.setPreferredSize(new Dimension(150, 720));
-        painelLateral.setBackground(Color.DARK_GRAY);
-        janela.add(painelLateral, BorderLayout.WEST);
-
-        for (ItemMenu item : user.getItems()) {
-            painelCentro.add(new ViewCardShop(item));
-        }
+        janela.setLayout(new BorderLayout(0, 0));
+        janela.add(buildTopBar(),  BorderLayout.NORTH);
+        janela.add(buildSidebar(), BorderLayout.WEST);
+        janela.add(buildCenter(),  BorderLayout.CENTER);
 
         janela.setVisible(true);
+
+        game.setOnMoneyChangedListener(() -> SwingUtilities.invokeLater(this::atualizarSaldo));
         game.start();
     }
 
+    private JPanel buildTopBar() {
+        JPanel top = new JPanel(new BorderLayout(10, 0));
+        top.setBackground(BG_SIDEBAR);
+        top.setBorder(BorderFactory.createEmptyBorder(8, 14, 8, 14));
+        top.setPreferredSize(new Dimension(1100, 58));
+
+        JPanel leftTop = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
+        leftTop.setBackground(BG_SIDEBAR);
+        JLabel avatar = new JLabel("🎩");
+        avatar.setFont(new Font("Dialog", Font.PLAIN, 32));
+        leftTop.add(avatar);
+        labelSaldo = new JLabel("$" + ViewCardShop.formatMoney(user.getMoney()));
+        labelSaldo.setFont(new Font("Arial", Font.BOLD, 40));  
+        labelSaldo.setForeground(TXT_GOLD);
+        leftTop.add(labelSaldo);
+        top.add(leftTop, BorderLayout.WEST);
+
+        JPanel rightTop = new JPanel(new FlowLayout(FlowLayout.RIGHT, 6, 0));
+        rightTop.setBackground(BG_SIDEBAR);
+        JLabel buyLabel = new JLabel("BUY:");
+        buyLabel.setForeground(TXT_CREAM);
+        buyLabel.setFont(new Font("Arial", Font.BOLD, 12));
+        rightTop.add(buyLabel);
+
+        String[] modes   = {"×1", "×10", "×100", "MAX"};
+        int[] modeValues = {1, 10, 100, -1};
+        buyModeButtons = new JButton[4];
+        for (int i = 0; i < modes.length; i++) {
+            final int val = modeValues[i];
+            JButton btn = new JButton(modes[i]);
+            btn.setFont(new Font("Arial", Font.BOLD, 12));
+            btn.setFocusPainted(false);
+            btn.setBorderPainted(false);
+            btn.setPreferredSize(new Dimension(58, 30));
+            btn.addActionListener(e -> { buyMode[0] = val; updateBuyModeButtons(); });
+            buyModeButtons[i] = btn;
+            rightTop.add(btn);
+        }
+        updateBuyModeButtons();
+        top.add(rightTop, BorderLayout.EAST);
+        return top;
+    }
+
+    private void updateBuyModeButtons() {
+        int[] modeValues = {1, 10, 100, -1};
+        for (int i = 0; i < buyModeButtons.length; i++) {
+            boolean sel = buyMode[0] == modeValues[i];
+            buyModeButtons[i].setBackground(sel ? new Color(232, 120, 32) : new Color(70, 55, 35));
+            buyModeButtons[i].setForeground(Color.WHITE);
+        }
+    }
+
+    private JPanel buildSidebar() {
+        JPanel sidebar = new JPanel();
+        sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
+        sidebar.setBackground(BG_SIDEBAR);
+        sidebar.setPreferredSize(new Dimension(155, 720));
+        sidebar.setBorder(BorderFactory.createEmptyBorder(12, 8, 12, 8));
+
+        for (String label : new String[]{"Career", "Unlocks", "Upgrades", "Managers", "Investors"}) {
+            JButton btn = makeMenuButton(label);
+            btn.addActionListener(e -> JOptionPane.showMessageDialog(janela, label + " — Em desenvolvimento"));
+            sidebar.add(btn);
+            sidebar.add(Box.createVerticalStrut(8));
+        }
+        sidebar.add(Box.createVerticalGlue());
+
+        JButton shopBtn = makeMenuButton("🏪  Shop");
+        shopBtn.setBackground(BTN_SHOP);
+        shopBtn.setForeground(Color.WHITE);
+        shopBtn.addActionListener(e -> JOptionPane.showMessageDialog(janela, "Shop — Em desenvolvimento"));
+        sidebar.add(shopBtn);
+        return sidebar;
+    }
+
+    private JButton makeMenuButton(String label) {
+        JButton btn = new JButton(label);
+        btn.setFont(new Font("Arial", Font.BOLD, 13));
+        btn.setBackground(BTN_MENU);
+        btn.setForeground(TXT_CREAM);
+        btn.setFocusPainted(false);
+        btn.setBorderPainted(false);
+        btn.setMaximumSize(new Dimension(139, 44));
+        btn.setPreferredSize(new Dimension(139, 44));
+        btn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        return btn;
+    }
+
+    private JPanel buildCenter() {
+        java.util.List<ItemMenu> items = user.getItems();
+
+        JPanel leftCol  = buildColumn(items, 0, Math.min(5, items.size()));
+        JPanel rightCol = buildColumn(items, 5, items.size());
+
+        JScrollPane leftScroll = new JScrollPane(leftCol);
+        leftScroll.setBackground(BG_MAIN);
+        leftScroll.getViewport().setBackground(BG_MAIN);
+        leftScroll.setBorder(null);
+        leftScroll.getVerticalScrollBar().setUnitIncrement(16);
+
+        JScrollPane rightScroll = new JScrollPane(rightCol);
+        rightScroll.setBackground(BG_MAIN);
+        rightScroll.getViewport().setBackground(BG_MAIN);
+        rightScroll.setBorder(null);
+        rightScroll.getVerticalScrollBar().setUnitIncrement(16);
+
+        JPanel container = new JPanel(new GridLayout(1, 2, 6, 0));
+        container.setBackground(BG_MAIN);
+        container.add(leftScroll);
+        container.add(rightScroll);
+        return container;
+    }
+
+    private JPanel buildColumn(java.util.List<ItemMenu> items, int from, int to) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(BG_MAIN);
+        panel.setBorder(BorderFactory.createEmptyBorder(8, 6, 8, 6));
+        for (int i = from; i < to; i++) {
+            ViewCardShop card = new ViewCardShop(items.get(i), user, buyMode, this::atualizarSaldo);
+            panel.add(card);
+            panel.add(Box.createVerticalStrut(3));
+        }
+        panel.add(Box.createVerticalGlue());
+        return panel;
+    }
+
+    private JPanel buildBottomBar() {
+        JPanel bot = new JPanel(new FlowLayout(FlowLayout.LEFT, 14, 8));
+        bot.setBackground(BG_SIDEBAR);
+        bot.setPreferredSize(new Dimension(1100, 48));
+
+        JButton adv = new JButton("🌍 AdVentures");
+        adv.setBackground(new Color(70, 90, 70));
+        adv.setForeground(TXT_CREAM);
+        adv.setFocusPainted(false); adv.setBorderPainted(false);
+        adv.setFont(new Font("Arial", Font.BOLD, 12));
+        adv.addActionListener(e -> JOptionPane.showMessageDialog(janela, "AdVentures — Em desenvolvimento"));
+        bot.add(adv);
+
+        JButton launch = new JButton("Launch! ▶");
+        launch.setBackground(BTN_LAUNCH);
+        launch.setForeground(Color.WHITE);
+        launch.setFocusPainted(false); launch.setBorderPainted(false);
+        launch.setFont(new Font("Arial", Font.BOLD, 13));
+        launch.addActionListener(e -> JOptionPane.showMessageDialog(janela, "Launch — Em desenvolvimento"));
+        bot.add(launch);
+
+        JLabel timer = new JLabel("00:00:00");
+        timer.setForeground(TXT_CREAM);
+        timer.setFont(new Font("Courier New", Font.BOLD, 14));
+        bot.add(timer);
+        return bot;
+    }
+
     public void atualizarSaldo() {
-        labelSaldo.setText("$" + user.getMoney());
+        labelSaldo.setText("$" + ViewCardShop.formatMoney(user.getMoney()));
     }
 
     public static void abrir() {

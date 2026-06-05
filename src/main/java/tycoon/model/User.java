@@ -9,7 +9,7 @@ import tycoon.world.Worlds;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
-    private long globalMoneyQuantity;
+    private long globalMoneyQuantity = 20;
     private ArrayList<ItemMenu> items = new ArrayList<>();
     private ArrayList<Investors> investors = new ArrayList<>();
     private ArrayList<Managers> managers = new ArrayList<>();
@@ -19,7 +19,6 @@ public class User implements Serializable {
         this.globalMoneyQuantity += amount;
     }
 
-    
     public void setMoney(long delta) {
         this.globalMoneyQuantity += delta;
     }
@@ -37,7 +36,7 @@ public class User implements Serializable {
     }
 
     public double getInvestorMultiplier() {
-        return Investors.calculateMultiplier(investors.size());
+        return 1.0 + Investors.calculateMultiplier(investors.size());
     }
 
     public void addItem(ItemMenu item) {

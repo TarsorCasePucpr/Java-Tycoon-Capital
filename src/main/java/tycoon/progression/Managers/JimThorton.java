@@ -1,18 +1,23 @@
-// Items Afetados NEWSPAPERDELIVERY e PIZZADELIVERY
-
-
 package tycoon.progression;
-import tycoon.progression.Managers;
-// Keep earning money even if you are offline — maybe implement, faz sentido?
-// Runs the clicking actions for you 
+
+import tycoon.business.ItemMenu;
+import tycoon.business.NewspaperDelivery;
+import tycoon.business.PizzaDelivery;
+
 public class JimThorton extends Managers {
-    private int value_manager = 50000;
-    private void action(ItemMenu item){
-        if(item instanceof NewspaperDelivery){
-            NewspaperDeliveryManager = true;
+    private static final int PRECO = 50000;
+
+    public JimThorton() {
+        super("Jim Thorton", PRECO);
+    }
+
+    @Override
+    public void action(ItemMenu item) {
+        if (item instanceof NewspaperDelivery) {
+            item.setManager(true);
         }
-        if(item instanceof PizzaDelivery){
-            PizzaDeliveryManager = true;
+        if (item instanceof PizzaDelivery) {
+            item.setManager(true);
         }
     }
 }

@@ -1,8 +1,23 @@
 package tycoon.progression;
 
-// Keep earning money even if you are offline — maybe implement, faz sentido?
-// Runs the clicking actions for you 
+import tycoon.business.ItemMenu;
+
 public abstract class Managers {
-    private int value_manager;
-    private abstract void action(ItemMenu item);
+    protected String nome;
+    protected int preco;
+
+    public Managers(String nome, int preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getPreco() {
+        return preco;
+    }
+
+    public abstract void action(ItemMenu item);
 }
