@@ -35,7 +35,6 @@ public class Game {
     }
 
     public void start() {
-        inicializarLojas();
         gameLoop = new Timer(100, e -> update());
         gameLoop.start();
     }

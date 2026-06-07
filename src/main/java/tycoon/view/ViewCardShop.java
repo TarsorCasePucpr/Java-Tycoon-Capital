@@ -246,10 +246,18 @@ public class ViewCardShop extends JPanel {
             labelTimer.setForeground(TXT_CREAM);
         }
 
-        int n = buyMode[0] == -1 ? Math.max(1, item.maxAffordable(user.getMoney())) : buyMode[0];
+        int affordable = item.maxAffordable(user.getMoney());
         String modeStr = buyMode[0] == -1 ? "MAX" : "×" + buyMode[0];
-        long cost = item.calcCostForN(n);
-        boolean canBuy = user.getMoney() >= item.getPrecoCompra();
+        long cost;
+        boolean canBuy;
+        if (buyMode[0] == -1) {
+            int n = Math.max(1, affordable);
+            cost = item.calcCostForN(n);
+            canBuy = affordable > 0;
+        } else {
+            cost = item.calcCostForN(buyMode[0]);
+            canBuy = affordable >= buyMode[0];
+        }
         btnBuy.setText("Buy " + modeStr + "  $" + formatMoney(cost));
         btnBuy.setBackground(canBuy ? BTN_BUY : BTN_BUY_OFF);
     }
