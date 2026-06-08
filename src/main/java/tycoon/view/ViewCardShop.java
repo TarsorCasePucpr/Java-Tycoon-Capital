@@ -63,8 +63,10 @@ public class ViewCardShop extends JPanel {
         leftPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         leftPanel.setBorder(BorderFactory.createEmptyBorder(8, 4, 8, 4));
 
-        JLabel iconLabel = new JLabel(getEmoji(), SwingConstants.CENTER);
-        iconLabel.setFont(new Font("Dialog", Font.PLAIN, 28));
+        ImageIcon icon = EmojiIcon.get(getEmojiName(), 36);
+        JLabel iconLabel = icon != null
+                ? new JLabel(icon, SwingConstants.CENTER)
+                : new JLabel(getEmojiName(), SwingConstants.CENTER);
         iconLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         leftPanel.add(iconLabel);
 
@@ -164,10 +166,15 @@ public class ViewCardShop extends JPanel {
         inner.setBackground(BG_COMPACT);
         inner.setBorder(BorderFactory.createEmptyBorder(6, 12, 6, 10));
 
-        JLabel nameLabel = new JLabel(getEmoji() + "  " + item.getNome());
+        JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 4, 0));
+        namePanel.setBackground(BG_COMPACT);
+        ImageIcon compactIcon = EmojiIcon.get(getEmojiName(), 20);
+        if (compactIcon != null) namePanel.add(new JLabel(compactIcon));
+        JLabel nameLabel = new JLabel(item.getNome());
         nameLabel.setFont(new Font("Arial", Font.BOLD, 12));
         nameLabel.setForeground(TXT_CREAM);
-        inner.add(nameLabel, BorderLayout.WEST);
+        namePanel.add(nameLabel);
+        inner.add(namePanel, BorderLayout.WEST);
 
         btnCompactBuy = new JButton("$" + formatMoney(item.getPrecoCompra()));
         btnCompactBuy.setFont(new Font("Arial", Font.BOLD, 11));
@@ -279,16 +286,16 @@ public class ViewCardShop extends JPanel {
         btnCompactBuy.setBackground(canBuy ? BTN_BUY : BTN_BUY_OFF);
     }
 
-    private String getEmoji() {
+    private String getEmojiName() {
         switch (item.getNome()) {
-            case "Lemon Stand":        return "🍋";
-            case "Newspaper Delivery": return "📰";
-            case "Car Wash":           return "🚗";
-            case "Pizza Delivery":     return "🍕";
-            case "Donut Shop":         return "🍩";
-            case "Shrimp Boat":        return "🦐";
-            case "Hockey Team":        return "🏒";
-            default:                   return "💼";
+            case "Lemon Stand":        return "lemon";
+            case "Newspaper Delivery": return "newspaper";
+            case "Car Wash":           return "car";
+            case "Pizza Delivery":     return "pizza";
+            case "Donut Shop":         return "donut";
+            case "Shrimp Boat":        return "shrimp";
+            case "Hockey Team":        return "hockey";
+            default:                   return "briefcase";
         }
     }
 

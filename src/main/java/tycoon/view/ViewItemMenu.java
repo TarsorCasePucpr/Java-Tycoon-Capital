@@ -79,8 +79,8 @@ public class ViewItemMenu {
 
         JPanel leftTop = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         leftTop.setBackground(BG_SIDEBAR);
-        JLabel avatar = new JLabel("🎩");
-        avatar.setFont(new Font("Dialog", Font.PLAIN, 32));
+        ImageIcon hatIcon = EmojiIcon.get("hat", 36);
+        JLabel avatar = hatIcon != null ? new JLabel(hatIcon) : new JLabel("$");
         leftTop.add(avatar);
         labelSaldo = new JLabel("$" + ViewCardShop.formatMoney(user.getMoney()));
         labelSaldo.setFont(new Font("Arial", Font.BOLD, 40));  
@@ -130,13 +130,13 @@ public class ViewItemMenu {
         sidebar.setPreferredSize(new Dimension(155, 720));
         sidebar.setBorder(BorderFactory.createEmptyBorder(12, 8, 12, 8));
 
-        JButton gameBtn = makeMenuButton("🎮  Game");
+        JButton gameBtn = makeMenuButton("  Game", "game");
         gameBtn.addActionListener(e -> cardLayout.show(centerContainer, "game"));
         sidebar.add(gameBtn);
         sidebar.add(Box.createVerticalStrut(8));
 
         for (String label : new String[]{"Career", "Unlocks", "Upgrades", "Managers", "Investors"}) {
-            JButton btn = makeMenuButton(label);
+            JButton btn = makeMenuButton(label, null);
             btn.addActionListener(e -> {
                 switch (label) {
                     case "Managers":  cardLayout.show(centerContainer, "managers");  break;
@@ -149,7 +149,7 @@ public class ViewItemMenu {
         }
         sidebar.add(Box.createVerticalGlue());
 
-        JButton shopBtn = makeMenuButton("🏪  Shop");
+        JButton shopBtn = makeMenuButton("  Shop", "shop");
         shopBtn.setBackground(BTN_SHOP);
         shopBtn.setForeground(Color.WHITE);
         shopBtn.addActionListener(e -> JOptionPane.showMessageDialog(janela, "Shop — Em desenvolvimento"));
@@ -157,7 +157,7 @@ public class ViewItemMenu {
         return sidebar;
     }
 
-    private JButton makeMenuButton(String label) {
+    private JButton makeMenuButton(String label, String emojiName) {
         JButton btn = new JButton(label);
         btn.setFont(new Font("Arial", Font.BOLD, 13));
         btn.setBackground(BTN_MENU);
@@ -167,6 +167,10 @@ public class ViewItemMenu {
         btn.setMaximumSize(new Dimension(139, 44));
         btn.setPreferredSize(new Dimension(139, 44));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        if (emojiName != null) {
+            ImageIcon icon = EmojiIcon.get(emojiName, 18);
+            if (icon != null) btn.setIcon(icon);
+        }
         return btn;
     }
 
@@ -214,7 +218,9 @@ public class ViewItemMenu {
         bot.setBackground(BG_SIDEBAR);
         bot.setPreferredSize(new Dimension(1100, 48));
 
-        JButton adv = new JButton("🌍 AdVentures");
+        JButton adv = new JButton(" AdVentures");
+        ImageIcon worldIcon = EmojiIcon.get("world", 16);
+        if (worldIcon != null) adv.setIcon(worldIcon);
         adv.setBackground(new Color(70, 90, 70));
         adv.setForeground(TXT_CREAM);
         adv.setFocusPainted(false); adv.setBorderPainted(false);
