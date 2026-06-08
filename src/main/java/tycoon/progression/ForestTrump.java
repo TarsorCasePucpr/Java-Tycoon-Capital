@@ -1,11 +1,10 @@
 package tycoon.progression;
 
 import tycoon.business.ItemMenu;
-import tycoon.business.HockeyTeam;
-import tycoon.business.Lemon;
+import tycoon.business.ShrimpBoat;
 
 public class ForestTrump extends Managers {
-    private static final int PRECO = 30000;
+    private static final int PRECO = 10_000_000;
 
     public ForestTrump() {
         super("Forest Trump", PRECO);
@@ -13,10 +12,7 @@ public class ForestTrump extends Managers {
 
     @Override
     public void action(ItemMenu item) {
-        if (item instanceof HockeyTeam) {
-            item.setManager(true);
-        }
-        if (item instanceof Lemon) {
+        if (item instanceof ShrimpBoat) {
             item.setManager(true);
         }
     }

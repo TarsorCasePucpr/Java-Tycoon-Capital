@@ -84,6 +84,7 @@ public abstract class ItemMenu {
         if (this.quantidade <= 0 || !isReady()) return;
         long lucroTotal = (long)(this.getLucro() * user.getInvestorMultiplier());
         user.setMoney(lucroTotal);
+        user.addLifetimeEarnings(lucroTotal);
         startProduction();
     }
 

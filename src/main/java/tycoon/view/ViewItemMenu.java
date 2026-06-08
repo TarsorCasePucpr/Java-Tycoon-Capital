@@ -26,6 +26,10 @@ public class ViewItemMenu {
     private JLabel labelSaldo;
     private int[] buyMode = {1};
     private JButton[] buyModeButtons;
+    private CardLayout cardLayout;
+    private JPanel centerContainer;
+    private ViewManagers viewManagers;
+    private ViewInvestors viewInvestors;
 
     public void show() {
         user = new User();
@@ -47,10 +51,19 @@ public class ViewItemMenu {
             }
         });
 
+        viewManagers  = new ViewManagers(user, this::atualizarSaldo);
+        viewInvestors = new ViewInvestors(user, this::doPrestige);
+
+        cardLayout = new CardLayout();
+        centerContainer = new JPanel(cardLayout);
+        centerContainer.add(buildCenter(),  "game");
+        centerContainer.add(viewManagers,   "managers");
+        centerContainer.add(viewInvestors,  "investors");
+
         janela.setLayout(new BorderLayout(0, 0));
-        janela.add(buildTopBar(),  BorderLayout.NORTH);
-        janela.add(buildSidebar(), BorderLayout.WEST);
-        janela.add(buildCenter(),  BorderLayout.CENTER);
+        janela.add(buildTopBar(),    BorderLayout.NORTH);
+        janela.add(buildSidebar(),   BorderLayout.WEST);
+        janela.add(centerContainer,  BorderLayout.CENTER);
 
         janela.setVisible(true);
 
@@ -117,9 +130,20 @@ public class ViewItemMenu {
         sidebar.setPreferredSize(new Dimension(155, 720));
         sidebar.setBorder(BorderFactory.createEmptyBorder(12, 8, 12, 8));
 
+        JButton gameBtn = makeMenuButton("🎮  Game");
+        gameBtn.addActionListener(e -> cardLayout.show(centerContainer, "game"));
+        sidebar.add(gameBtn);
+        sidebar.add(Box.createVerticalStrut(8));
+
         for (String label : new String[]{"Career", "Unlocks", "Upgrades", "Managers", "Investors"}) {
             JButton btn = makeMenuButton(label);
-            btn.addActionListener(e -> JOptionPane.showMessageDialog(janela, label + " — Em desenvolvimento"));
+            btn.addActionListener(e -> {
+                switch (label) {
+                    case "Managers":  cardLayout.show(centerContainer, "managers");  break;
+                    case "Investors": cardLayout.show(centerContainer, "investors"); break;
+                    default: JOptionPane.showMessageDialog(janela, label + " — Em desenvolvimento");
+                }
+            });
             sidebar.add(btn);
             sidebar.add(Box.createVerticalStrut(8));
         }
@@ -215,6 +239,15 @@ public class ViewItemMenu {
 
     public void atualizarSaldo() {
         labelSaldo.setText("$" + ViewCardShop.formatMoney(user.getMoney()));
+    }
+
+    private void doPrestige() {
+        tycoon.progression.Investors.prestige(user);
+        user.reapplyManagers();
+        SwingUtilities.invokeLater(() -> {
+            atualizarSaldo();
+            cardLayout.show(centerContainer, "game");
+        });
     }
 
     public static void abrir() {

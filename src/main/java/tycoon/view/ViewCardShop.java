@@ -194,6 +194,15 @@ public class ViewCardShop extends JPanel {
         }
     }
 
+    private void switchToCompact() {
+        this.expanded = false;
+        buildCompact();
+        if (getParent() != null) {
+            getParent().revalidate();
+            getParent().repaint();
+        }
+    }
+
     private void comprar() {
         int n = getBuyAmount();
         if (n <= 0) return; 
@@ -228,6 +237,7 @@ public class ViewCardShop extends JPanel {
 
     private void atualizarExpanded() {
         if (labelQty == null) return;
+        if (item.getQuantidade() == 0) { switchToCompact(); return; }
 
         labelQty.setText(String.valueOf(item.getQuantidade()));
         labelLucro.setText("$" + formatMoney(item.getLucro()) + " / ciclo");

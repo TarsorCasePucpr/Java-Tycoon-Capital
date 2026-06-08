@@ -1,11 +1,10 @@
 package tycoon.progression;
 
 import tycoon.business.ItemMenu;
-import tycoon.business.NewspaperDelivery;
-import tycoon.business.PizzaDelivery;
+import tycoon.business.DonutShop;
 
 public class JimThorton extends Managers {
-    private static final int PRECO = 50000;
+    private static final int PRECO = 1_200_000;
 
     public JimThorton() {
         super("Jim Thorton", PRECO);
@@ -13,10 +12,7 @@ public class JimThorton extends Managers {
 
     @Override
     public void action(ItemMenu item) {
-        if (item instanceof NewspaperDelivery) {
-            item.setManager(true);
-        }
-        if (item instanceof PizzaDelivery) {
+        if (item instanceof DonutShop) {
             item.setManager(true);
         }
     }
