@@ -9,7 +9,8 @@ import tycoon.world.Worlds;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
-    private long globalMoneyQuantity = 20;
+    private static final long STARTING_MONEY = 20;
+    private long globalMoneyQuantity = STARTING_MONEY;
     private long lifetimeEarnings = 0;
     private ArrayList<ItemMenu> items = new ArrayList<>();
     private ArrayList<Investors> investors = new ArrayList<>();
@@ -25,7 +26,7 @@ public class User implements Serializable {
     }
 
     public void resetMoney() {
-        this.globalMoneyQuantity = 0;
+        this.globalMoneyQuantity = STARTING_MONEY;
     }
 
     public long getMoney() {
