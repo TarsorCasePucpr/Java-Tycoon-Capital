@@ -1,9 +1,11 @@
 package tycoon.business;
 
+import java.io.Serializable;
 import tycoon.exceptions.ExcecaoSaldoInsuficiente;
 import tycoon.model.User;
 
-public abstract class ItemMenu {
+public abstract class ItemMenu implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected String nome;
     protected long preco_compra_base;
     protected int quantidade;

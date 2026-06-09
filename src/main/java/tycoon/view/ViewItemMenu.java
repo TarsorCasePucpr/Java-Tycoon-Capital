@@ -32,9 +32,18 @@ public class ViewItemMenu {
     private ViewInvestors viewInvestors;
 
     public void show() {
-        user = new User();
+        try {
+            user = Persistence.loadUser("user.dat");
+        } catch (Exception e) {
+            user = new User();
+        }
+
         game = new Game(user);
-        game.inicializarLojas();
+        if (user.getItems().isEmpty()) {
+            game.inicializarLojas();
+        } else {
+            user.getItems().forEach(ItemMenu::ensureProductionStarted);
+        }
 
         janela = new JFrame("Java Tycoon Capital");
         janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

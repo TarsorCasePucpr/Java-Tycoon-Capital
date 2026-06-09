@@ -1,9 +1,11 @@
 package tycoon.progression;
 
+import java.io.Serializable;
 import tycoon.business.ItemMenu;
 import tycoon.model.User;
 
-public class Investors {
+public class Investors implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String nome;
 
     public Investors(String nome) {
