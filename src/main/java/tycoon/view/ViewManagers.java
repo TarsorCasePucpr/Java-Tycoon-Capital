@@ -6,6 +6,7 @@ import tycoon.model.User;
 import tycoon.progression.DawnCheri;
 import tycoon.progression.ForestTrump;
 import tycoon.progression.JimThorton;
+import tycoon.progression.LemonerSilva;
 import tycoon.progression.Managers;
 import tycoon.progression.MamaSean;
 
@@ -30,6 +31,7 @@ public class ViewManagers extends JPanel {
         this.user = user;
         this.onUpdate = onUpdate;
         this.allManagers = new Managers[]{
+            new LemonerSilva(),
             new MamaSean(),
             new JimThorton(),
             new ForestTrump(),
@@ -189,6 +191,7 @@ public class ViewManagers extends JPanel {
 
     private String getDescription(Managers m) {
         switch (m.getClass().getSimpleName()) {
+            case "LemonerSilva": return "Runs the Lemon automatically";
             case "MamaSean":    return "Runs the Pizza Delivery automatically";
             case "JimThorton":  return "Runs the Donut Shop automatically";
             case "ForestTrump": return "Runs the Shrimp Boat automatically";
