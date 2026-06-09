@@ -35,13 +35,18 @@ public class ViewInvestors extends JPanel {
     private JPanel buildHeader() {
         JPanel header = new JPanel(new BorderLayout());
         header.setBackground(new Color(15, 30, 15));
-        header.setBorder(BorderFactory.createEmptyBorder(12, 16, 12, 16));
-        header.setPreferredSize(new Dimension(0, 56));
+        header.setBorder(BorderFactory.createEmptyBorder(10, 16, 10, 16));
+        header.setPreferredSize(new Dimension(0, 52));
 
-        JLabel title = new JLabel("😇  Angel Investors");
+        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
+        titlePanel.setBackground(new Color(15, 30, 15));
+        ImageIcon angelIcon = EmojiIcon.get("angel", 28);
+        if (angelIcon != null) titlePanel.add(new JLabel(angelIcon));
+        JLabel title = new JLabel("Angel Investors");
         title.setFont(new Font("Arial", Font.BOLD, 20));
         title.setForeground(TXT_GOLD);
-        header.add(title, BorderLayout.WEST);
+        titlePanel.add(title);
+        header.add(titlePanel, BorderLayout.WEST);
 
         JLabel subtitle = new JLabel("+2% income per angel  ·  angels persist through restarts");
         subtitle.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -55,7 +60,7 @@ public class ViewInvestors extends JPanel {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(BG_MAIN);
-        panel.setBorder(BorderFactory.createEmptyBorder(28, 48, 28, 48));
+        panel.setBorder(BorderFactory.createEmptyBorder(18, 48, 18, 48));
 
         panel.add(buildActiveCard());
         panel.add(Box.createVerticalStrut(18));
@@ -72,9 +77,10 @@ public class ViewInvestors extends JPanel {
     private JPanel buildActiveCard() {
         JPanel card = makeStatCard();
 
-        JLabel title = new JLabel("Active Angels");
+        JLabel title = new JLabel("Active Angels", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 13));
         title.setForeground(new Color(150, 175, 200));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
         card.add(title);
 
         card.add(Box.createVerticalStrut(6));
@@ -99,9 +105,10 @@ public class ViewInvestors extends JPanel {
     private JPanel buildPendingCard() {
         JPanel card = makeStatCard();
 
-        JLabel title = new JLabel("Angels Available to Claim");
+        JLabel title = new JLabel("Angels Available to Claim", SwingConstants.CENTER);
         title.setFont(new Font("Arial", Font.BOLD, 13));
         title.setForeground(new Color(150, 175, 200));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
         card.add(title);
 
         card.add(Box.createVerticalStrut(6));

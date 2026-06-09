@@ -41,6 +41,10 @@ public class User implements Serializable {
         return lifetimeEarnings;
     }
 
+    public void resetLifetimeEarnings() {
+        this.lifetimeEarnings = 0;
+    }
+
     public void addInvestor(Investors investor) {
         this.investors.add(investor);
     }

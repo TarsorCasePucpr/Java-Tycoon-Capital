@@ -57,7 +57,7 @@ public class ViewCardShop extends JPanel {
 
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-        leftPanel.setBackground(new Color(20, 40, 20));  
+        leftPanel.setBackground(new Color(20, 40, 20));
         leftPanel.setPreferredSize(new Dimension(70, 88));
         leftPanel.setMinimumSize(new Dimension(70, 88));
         leftPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -287,16 +287,7 @@ public class ViewCardShop extends JPanel {
     }
 
     private String getEmojiName() {
-        switch (item.getNome()) {
-            case "Lemon Stand":        return "lemon";
-            case "Newspaper Delivery": return "newspaper";
-            case "Car Wash":           return "car";
-            case "Pizza Delivery":     return "pizza";
-            case "Donut Shop":         return "donut";
-            case "Shrimp Boat":        return "shrimp";
-            case "Hockey Team":        return "hockey";
-            default:                   return "briefcase";
-        }
+        return item.getEmojiName();
     }
 
     static String formatMoney(long amount) {

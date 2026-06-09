@@ -38,5 +38,6 @@ public class Investors implements Serializable {
         }
 
         user.resetMoney();
+        user.resetLifetimeEarnings();
     }
 }

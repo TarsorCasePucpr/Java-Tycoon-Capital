@@ -4,7 +4,7 @@ import java.io.Serializable;
 import tycoon.exceptions.ExcecaoSaldoInsuficiente;
 import tycoon.model.User;
 
-public abstract class ItemMenu implements Serializable {
+public abstract class ItemMenu implements Producible, Serializable {
     private static final long serialVersionUID = 1L;
     protected String nome;
     protected long preco_compra_base;
@@ -127,6 +127,8 @@ public abstract class ItemMenu implements Serializable {
         this.quantidade += n;
         ensureProductionStarted();
     }
+
+    public String getEmojiName() { return "briefcase"; }
 
     public abstract void comprar(User user) throws ExcecaoSaldoInsuficiente;
     public abstract void reset_cambio_mundo();
