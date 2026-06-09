@@ -3,12 +3,14 @@ package tycoon.view;
 import java.awt.*;
 import javax.swing.*;
 import tycoon.model.User;
+import tycoon.progression.CarlosWasher;
 import tycoon.progression.DawnCheri;
 import tycoon.progression.ForestTrump;
 import tycoon.progression.JimThorton;
 import tycoon.progression.LemonerSilva;
 import tycoon.progression.Managers;
 import tycoon.progression.MamaSean;
+import tycoon.progression.NewmanSantos;
 
 public class ViewManagers extends JPanel {
 
@@ -32,6 +34,8 @@ public class ViewManagers extends JPanel {
         this.onUpdate = onUpdate;
         this.allManagers = new Managers[]{
             new LemonerSilva(),
+            new NewmanSantos(),
+            new CarlosWasher(),
             new MamaSean(),
             new JimThorton(),
             new ForestTrump(),
@@ -192,6 +196,8 @@ public class ViewManagers extends JPanel {
     private String getDescription(Managers m) {
         switch (m.getClass().getSimpleName()) {
             case "LemonerSilva": return "Runs the Lemon automatically";
+            case "NewmanSantos": return "Runs the NewspaperDelivery automatically";
+            case "CarlosWasher": return "Runs the CarWash automatically";
             case "MamaSean":    return "Runs the Pizza Delivery automatically";
             case "JimThorton":  return "Runs the Donut Shop automatically";
             case "ForestTrump": return "Runs the Shrimp Boat automatically";
