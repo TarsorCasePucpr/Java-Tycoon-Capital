@@ -68,6 +68,7 @@ public class ViewItemMenu {
         centerContainer.add(buildCenter(),  "game");
         centerContainer.add(viewManagers,   "managers");
         centerContainer.add(viewInvestors,  "investors");
+        centerContainer.add(new ViewUnlocksMenu(), "unlocks");
 
         janela.setLayout(new BorderLayout(0, 0));
         janela.add(buildTopBar(),    BorderLayout.NORTH);
@@ -150,6 +151,7 @@ public class ViewItemMenu {
                 switch (label) {
                     case "Managers":  cardLayout.show(centerContainer, "managers");  break;
                     case "Investors": cardLayout.show(centerContainer, "investors"); break;
+                    case "Unlocks":   cardLayout.show(centerContainer, "unlocks"); break;
                     default: JOptionPane.showMessageDialog(janela, label + " — Em desenvolvimento");
                 }
             });
