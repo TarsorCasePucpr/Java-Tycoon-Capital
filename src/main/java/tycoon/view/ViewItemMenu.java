@@ -14,11 +14,8 @@ public class ViewItemMenu {
     private static final Color BG_MAIN    = new Color(24, 40, 24);    
     private static final Color BG_SIDEBAR = new Color(15, 28, 15);    
     private static final Color BTN_MENU   = new Color(55, 90, 55);    
-    private static final Color BTN_SHOP   = new Color(190, 145, 30);  
-    private static final Color BTN_LAUNCH = new Color(85, 170, 51);
-    private static final Color TXT_CREAM  = new Color(255, 244, 213); 
-    private static final Color TXT_GOLD   = new Color(245, 197, 24);  
-    private static final Color TXT_DARK   = new Color(15, 28, 15);
+    private static final Color TXT_CREAM  = new Color(255, 244, 213);
+    private static final Color TXT_GOLD   = new Color(245, 197, 24);
 
     private JFrame janela;
     private User user;
@@ -148,7 +145,7 @@ public class ViewItemMenu {
         sidebar.add(gameBtn);
         sidebar.add(Box.createVerticalStrut(8));
 
-        for (String label : new String[]{"Career", "Unlocks", "Upgrades", "Managers", "Investors"}) {
+        for (String label : new String[]{"Unlocks", "Upgrades", "Managers", "Investors"}) {
             JButton btn = makeMenuButton(label, null);
             btn.addActionListener(e -> {
                 switch (label) {
@@ -163,12 +160,6 @@ public class ViewItemMenu {
             sidebar.add(Box.createVerticalStrut(8));
         }
         sidebar.add(Box.createVerticalGlue());
-
-        JButton shopBtn = makeMenuButton("  Shop", "shop");
-        shopBtn.setBackground(BTN_SHOP);
-        shopBtn.setForeground(Color.WHITE);
-        shopBtn.addActionListener(e -> JOptionPane.showMessageDialog(janela, "Shop — Em desenvolvimento"));
-        sidebar.add(shopBtn);
         return sidebar;
     }
 
@@ -226,36 +217,6 @@ public class ViewItemMenu {
         }
         panel.add(Box.createVerticalGlue());
         return panel;
-    }
-
-    private JPanel buildBottomBar() {
-        JPanel bot = new JPanel(new FlowLayout(FlowLayout.LEFT, 14, 8));
-        bot.setBackground(BG_SIDEBAR);
-        bot.setPreferredSize(new Dimension(1100, 48));
-
-        JButton adv = new JButton(" AdVentures");
-        ImageIcon worldIcon = EmojiIcon.get("world", 16);
-        if (worldIcon != null) adv.setIcon(worldIcon);
-        adv.setBackground(new Color(70, 90, 70));
-        adv.setForeground(TXT_CREAM);
-        adv.setFocusPainted(false); adv.setBorderPainted(false);
-        adv.setFont(new Font("Arial", Font.BOLD, 12));
-        adv.addActionListener(e -> JOptionPane.showMessageDialog(janela, "AdVentures — Em desenvolvimento"));
-        bot.add(adv);
-
-        JButton launch = new JButton("Launch! ▶");
-        launch.setBackground(BTN_LAUNCH);
-        launch.setForeground(Color.WHITE);
-        launch.setFocusPainted(false); launch.setBorderPainted(false);
-        launch.setFont(new Font("Arial", Font.BOLD, 13));
-        launch.addActionListener(e -> JOptionPane.showMessageDialog(janela, "Launch — Em desenvolvimento"));
-        bot.add(launch);
-
-        JLabel timer = new JLabel("00:00:00");
-        timer.setForeground(TXT_CREAM);
-        timer.setFont(new Font("Courier New", Font.BOLD, 14));
-        bot.add(timer);
-        return bot;
     }
 
     public void atualizarSaldo() {

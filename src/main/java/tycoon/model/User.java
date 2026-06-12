@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import tycoon.business.ItemMenu;
 import tycoon.progression.Investors;
 import tycoon.progression.Managers;
-import tycoon.world.Worlds;
-
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final long STARTING_MONEY = 20;
@@ -15,7 +13,6 @@ public class User implements Serializable {
     private ArrayList<ItemMenu> items = new ArrayList<>();
     private ArrayList<Investors> investors = new ArrayList<>();
     private ArrayList<Managers> managers = new ArrayList<>();
-    private Worlds currentWorld;
     private int multiplicador = 1;
 
     public void addMoney(long amount) {
@@ -97,12 +94,5 @@ public class User implements Serializable {
         return managers;
     }
 
-    public Worlds getCurrentWorld() {
-        return currentWorld;
-    }
-
-    public void setCurrentWorld(Worlds world) {
-        this.currentWorld = world;
-    }
-
 }
+

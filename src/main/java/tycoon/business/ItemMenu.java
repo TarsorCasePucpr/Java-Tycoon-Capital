@@ -130,6 +130,9 @@ public abstract class ItemMenu implements Producible, Serializable {
 
     public String getEmojiName() { return "briefcase"; }
 
-    public abstract void comprar(User user) throws ExcecaoSaldoInsuficiente;
-    public abstract void reset_cambio_mundo();
+    public void reset() {
+        this.quantidade = 0;
+        this.nextReadyTime = 0;
+        this.managerAtivo = false;
+    }
 }

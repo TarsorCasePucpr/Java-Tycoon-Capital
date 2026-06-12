@@ -34,7 +34,7 @@ public class Investors implements Serializable {
         }
 
         for (ItemMenu item : user.getItems()) {
-            item.reset_cambio_mundo();
+            item.reset();
         }
 
         user.resetMoney();
