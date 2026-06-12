@@ -68,8 +68,8 @@ public class ViewItemMenu {
         centerContainer.add(buildCenter(),  "game");
         centerContainer.add(viewManagers,   "managers");
         centerContainer.add(viewInvestors,  "investors");
-        centerContainer.add(new ViewUnlocksMenu(), "unlocks");
-
+        centerContainer.add(new ViewUnlocksMenu(user), "unlocks");
+        
         janela.setLayout(new BorderLayout(0, 0));
         janela.add(buildTopBar(),    BorderLayout.NORTH);
         janela.add(buildSidebar(),   BorderLayout.WEST);

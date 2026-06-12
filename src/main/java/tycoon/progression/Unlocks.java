@@ -5,10 +5,12 @@ public class Unlocks {
     private String nome;
     private long price;
     private boolean unlocked;
+    private String preco;
 
-    public Unlocks(String nome, long price, String imagePath) {
+    public Unlocks(String nome, long price,String preco ,String imagePath) {
         this.nome = nome;
         this.price = price;
+        this.preco = preco;
         this.imagePath = imagePath;
         this.unlocked = false;
     }
@@ -19,6 +21,10 @@ public class Unlocks {
 
     public String getNome() {
         return nome;
+    }
+
+    public String getPreco() {
+        return preco;
     }
 
     public long getPrice() {
