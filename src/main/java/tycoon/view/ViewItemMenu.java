@@ -153,7 +153,6 @@ public class ViewItemMenu {
                     case "Investors": cardLayout.show(centerContainer, "investors"); break;
                     case "Unlocks":   cardLayout.show(centerContainer, "unlocks"); break;
                     case "Upgrades":  cardLayout.show(centerContainer, "upgrades"); break;
-                    default: JOptionPane.showMessageDialog(janela, label + " — Em desenvolvimento");
                 }
             });
             sidebar.add(btn);

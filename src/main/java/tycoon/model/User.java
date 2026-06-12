@@ -15,10 +15,6 @@ public class User implements Serializable {
     private ArrayList<Managers> managers = new ArrayList<>();
     private int multiplicador = 1;
 
-    public void addMoney(long amount) {
-        this.globalMoneyQuantity += amount;
-    }
-
     public void setMoney(long delta) {
         if (delta > 0) {
             this.globalMoneyQuantity += delta * multiplicador;
