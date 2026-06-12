@@ -30,6 +30,7 @@ public class ViewItemMenu {
     private JPanel centerContainer;
     private ViewManagers viewManagers;
     private ViewInvestors viewInvestors;
+    private ViewUpgrades viewUpgrades;
 
     public void show() {
         try {
@@ -62,12 +63,14 @@ public class ViewItemMenu {
 
         viewManagers  = new ViewManagers(user, this::atualizarSaldo);
         viewInvestors = new ViewInvestors(user, this::doPrestige);
+        viewUpgrades  = new ViewUpgrades(user);
 
         cardLayout = new CardLayout();
         centerContainer = new JPanel(cardLayout);
         centerContainer.add(buildCenter(),  "game");
         centerContainer.add(viewManagers,   "managers");
         centerContainer.add(viewInvestors,  "investors");
+        centerContainer.add(viewUpgrades,   "upgrades");
         centerContainer.add(new ViewUnlocksMenu(), "unlocks");
 
         janela.setLayout(new BorderLayout(0, 0));
@@ -152,6 +155,7 @@ public class ViewItemMenu {
                     case "Managers":  cardLayout.show(centerContainer, "managers");  break;
                     case "Investors": cardLayout.show(centerContainer, "investors"); break;
                     case "Unlocks":   cardLayout.show(centerContainer, "unlocks"); break;
+                    case "Upgrades":  cardLayout.show(centerContainer, "upgrades"); break;
                     default: JOptionPane.showMessageDialog(janela, label + " — Em desenvolvimento");
                 }
             });

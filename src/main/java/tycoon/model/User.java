@@ -16,13 +16,18 @@ public class User implements Serializable {
     private ArrayList<Investors> investors = new ArrayList<>();
     private ArrayList<Managers> managers = new ArrayList<>();
     private Worlds currentWorld;
+    private int multiplicador = 1;
 
     public void addMoney(long amount) {
         this.globalMoneyQuantity += amount;
     }
 
     public void setMoney(long delta) {
-        this.globalMoneyQuantity += delta;
+        if (delta > 0) {
+            this.globalMoneyQuantity += delta * multiplicador;
+        } else {
+            this.globalMoneyQuantity += delta;
+        }
     }
 
     public void resetMoney() {
@@ -43,6 +48,14 @@ public class User implements Serializable {
 
     public void resetLifetimeEarnings() {
         this.lifetimeEarnings = 0;
+    }
+
+    public int getMultiplicador() {
+        return multiplicador;
+    }
+
+    public void setMultiplicador(int multiplicador) {
+        this.multiplicador = multiplicador;
     }
 
     public void addInvestor(Investors investor) {
