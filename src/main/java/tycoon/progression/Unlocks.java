@@ -1,6 +1,9 @@
 package tycoon.progression;
 
-public class Unlocks {
+import java.io.Serializable;
+
+public class Unlocks implements Serializable {
+     private static final long serialVersionUID = 1L;
     private String imagePath;
     private String nome;
     private long price;

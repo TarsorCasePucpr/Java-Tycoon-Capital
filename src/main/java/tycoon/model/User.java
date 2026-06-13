@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import tycoon.business.ItemMenu;
 import tycoon.progression.Investors;
 import tycoon.progression.Managers;
+import tycoon.progression.Unlocks;
+
 public class User implements Serializable {
+    private ArrayList<Unlocks> unlocks = new ArrayList<>();
     private static final long serialVersionUID = 1L;
-    private static final long STARTING_MONEY = 20;
+    private static final long STARTING_MONEY = 20000;
     private long globalMoneyQuantity = STARTING_MONEY;
     private long lifetimeEarnings = 0;
     private ArrayList<ItemMenu> items = new ArrayList<>();
@@ -21,6 +24,14 @@ public class User implements Serializable {
         } else {
             this.globalMoneyQuantity += delta;
         }
+    }
+
+    public ArrayList<Unlocks> getUnlocks() {
+        return unlocks;
+    }
+
+    public void addUnlock(Unlocks unlock) {
+        this.unlocks.add(unlock);
     }
 
     public void resetMoney() {

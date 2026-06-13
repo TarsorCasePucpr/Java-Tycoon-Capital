@@ -1,5 +1,9 @@
 package tycoon;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.Timer;
 import tycoon.business.CarWash;
 import tycoon.business.DonutShop;
@@ -10,6 +14,7 @@ import tycoon.business.NewspaperDelivery;
 import tycoon.business.PizzaDelivery;
 import tycoon.business.ShrimpBoat;
 import tycoon.model.User;
+import tycoon.progression.Unlocks;
 
 public class Game {
     private User user;
@@ -26,6 +31,17 @@ public class Game {
         user.addItem(new HockeyTeam());
     }
 
+   public void inicializarUnlocks() {
+    try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/unlocks.csv"))) {
+        String linha;
+            while ((linha = br.readLine()) != null) {
+                String[] partes = linha.split(",");
+                user.addUnlock(new Unlocks(partes[0], Long.parseLong(partes[1]), partes[2], partes[3]));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public Game(User user) {
         this.user = user;
     }

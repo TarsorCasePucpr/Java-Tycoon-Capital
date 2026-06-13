@@ -28,6 +28,7 @@ public class ViewItemMenu {
     private ViewManagers viewManagers;
     private ViewInvestors viewInvestors;
     private ViewUpgrades viewUpgrades;
+    private ViewUnlocksMenu viewUnlocks;
 
     public void show() {
         try {
@@ -39,6 +40,7 @@ public class ViewItemMenu {
         game = new Game(user);
         if (user.getItems().isEmpty()) {
             game.inicializarLojas();
+            game.inicializarUnlocks();
         } else {
             user.getItems().forEach(ItemMenu::ensureProductionStarted);
         }
@@ -61,6 +63,7 @@ public class ViewItemMenu {
         viewManagers  = new ViewManagers(user, this::atualizarSaldo);
         viewInvestors = new ViewInvestors(user, this::doPrestige);
         viewUpgrades  = new ViewUpgrades(user);
+        viewUnlocks   = new ViewUnlocksMenu(user, this::atualizarSaldo);
 
         cardLayout = new CardLayout();
         centerContainer = new JPanel(cardLayout);
@@ -68,7 +71,7 @@ public class ViewItemMenu {
         centerContainer.add(viewManagers,   "managers");
         centerContainer.add(viewInvestors,  "investors");
         centerContainer.add(viewUpgrades,   "upgrades");
-        centerContainer.add(new ViewUnlocksMenu(user), "unlocks");
+        centerContainer.add(viewUnlocks, "unlocks");
         
         janela.setLayout(new BorderLayout(0, 0));
         janela.add(buildTopBar(),    BorderLayout.NORTH);

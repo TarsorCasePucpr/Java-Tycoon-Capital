@@ -14,7 +14,7 @@ import tycoon.progression.Unlocks;
 
 public class ViewUnlocks extends JPanel{
     private static final Color BG_EXPANDED  = new Color(35, 62, 35);
-    public ViewUnlocks(Unlocks item, User user) {
+    public ViewUnlocks(Unlocks item, User user, Runnable onMoneyChanged) {
         // Configurações do painel de desbloqueios
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         ImageIcon imagemOriginal = new ImageIcon(item.getImagePath());
@@ -28,6 +28,10 @@ public class ViewUnlocks extends JPanel{
         nome.setAlignmentX(CENTER_ALIGNMENT);
         preco.setAlignmentX(CENTER_ALIGNMENT);
         unlockButton.setAlignmentX(CENTER_ALIGNMENT);
+        if (item.isUnlocked()) {
+            unlockButton.setText("Desbloqueado");
+            unlockButton.setEnabled(false);
+        }
         add(icone);
         add(nome);
         add(preco);
@@ -43,6 +47,7 @@ public class ViewUnlocks extends JPanel{
             if (user.getMoney() >= item.getPrice() && !item.isUnlocked()) {
                 user.setMoney(-item.getPrice());
                 item.unlock();
+                onMoneyChanged.run();
                 unlockButton.setText("Desbloqueado");
                 unlockButton.setEnabled(false);
             }
