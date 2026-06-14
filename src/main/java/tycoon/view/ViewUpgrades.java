@@ -17,11 +17,13 @@ public class ViewUpgrades extends JPanel {
     private static final Color TXT_GREEN = new Color(130, 220, 130);
 
     private User user;
+    private Runnable onMoneyChanged;
     private JButton btnUpgrade;
     private JLabel lblStatus;
 
-    public ViewUpgrades(User user) {
+    public ViewUpgrades(User user, Runnable onMoneyChanged) {
         this.user = user;
+        this.onMoneyChanged = onMoneyChanged;
         setLayout(new BorderLayout());
         setBackground(BG_MAIN);
         add(buildHeader(), BorderLayout.NORTH);
@@ -128,6 +130,7 @@ public class ViewUpgrades extends JPanel {
         }
 
         user.setMoney(-50000);
+        if (onMoneyChanged != null) onMoneyChanged.run();
         user.setMultiplicador(2);
 
         JOptionPane.showMessageDialog(this, "X2 ativado por 5 minutos!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

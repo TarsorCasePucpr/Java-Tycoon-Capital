@@ -62,7 +62,7 @@ public class ViewItemMenu {
 
         viewManagers  = new ViewManagers(user, this::atualizarSaldo);
         viewInvestors = new ViewInvestors(user, this::doPrestige);
-        viewUpgrades  = new ViewUpgrades(user);
+        viewUpgrades  = new ViewUpgrades(user, this::atualizarSaldo);
         viewUnlocks   = new ViewUnlocksMenu(user, this::atualizarSaldo);
 
         cardLayout = new CardLayout();
