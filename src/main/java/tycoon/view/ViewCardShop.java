@@ -212,14 +212,14 @@ public class ViewCardShop extends JPanel {
 
     private void comprar() {
         int n = getBuyAmount();
-        if (n <= 0) return; 
+        if (n <= 0) n = 1;
         boolean wasZero = item.getQuantidade() == 0;
         try {
             item.comprarN(user, n);
             if (wasZero && item.getQuantidade() > 0) switchToExpanded();
             onUpdate.run();
         } catch (ExcecaoSaldoInsuficiente ex) {
-            
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Compra Inválida", JOptionPane.ERROR_MESSAGE);
         }
     }
 
