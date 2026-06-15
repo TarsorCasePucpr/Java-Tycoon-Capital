@@ -10,7 +10,7 @@ import tycoon.progression.Unlocks;
 public class User implements Serializable {
     private ArrayList<Unlocks> unlocks = new ArrayList<>();
     private static final long serialVersionUID = 1L;
-    private static final long STARTING_MONEY = 20000;
+    private static final long STARTING_MONEY = 20;
     private long globalMoneyQuantity = STARTING_MONEY;
     private long lifetimeEarnings = 0;
     private ArrayList<ItemMenu> items = new ArrayList<>();
