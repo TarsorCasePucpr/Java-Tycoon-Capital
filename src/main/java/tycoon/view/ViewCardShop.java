@@ -52,7 +52,7 @@ public class ViewCardShop extends JPanel {
         setBackground(BG_EXPANDED);
         setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(140, 100, 50)));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 70));
-        setPreferredSize(new Dimension(800, 70));
+        setPreferredSize(new Dimension(200, 70));
         setMinimumSize(new Dimension(100, 70));
 
         JPanel leftPanel = new JPanel();
@@ -159,7 +159,7 @@ public class ViewCardShop extends JPanel {
         setBackground(BG_COMPACT);
         setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(80, 60, 35)));
         setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
-        setPreferredSize(new Dimension(800, 44));
+        setPreferredSize(new Dimension(200, 44));
         setMinimumSize(new Dimension(100, 44));
 
         JPanel inner = new JPanel();
@@ -178,7 +178,7 @@ public class ViewCardShop extends JPanel {
         namePanel.setAlignmentY(Component.CENTER_ALIGNMENT);
         inner.add(namePanel);
 
-        inner.add(Box.createRigidArea(new Dimension(16, 0)));
+        inner.add(Box.createHorizontalGlue());
 
         btnCompactBuy = new JButton("$" + formatMoney(item.getPrecoCompra()));
         btnCompactBuy.setFont(new Font("Arial", Font.BOLD, 11));
@@ -191,8 +191,6 @@ public class ViewCardShop extends JPanel {
         btnCompactBuy.setAlignmentY(Component.CENTER_ALIGNMENT);
         btnCompactBuy.addActionListener(e -> comprar());
         inner.add(btnCompactBuy);
-
-        inner.add(Box.createHorizontalGlue());
 
         add(inner, BorderLayout.CENTER);
 

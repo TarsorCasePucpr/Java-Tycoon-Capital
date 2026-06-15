@@ -47,7 +47,7 @@ public class ViewItemMenu {
 
         janela = new JFrame("Java Tycoon Capital");
         janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        janela.setSize(960, 620);
+        janela.setSize(1440, 900);
         janela.setLocationRelativeTo(null);
         janela.getContentPane().setBackground(BG_MAIN);
 
@@ -79,6 +79,7 @@ public class ViewItemMenu {
         janela.add(centerContainer,  BorderLayout.CENTER);
 
         janela.setVisible(true);
+        janela.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         game.setOnMoneyChangedListener(() -> SwingUtilities.invokeLater(this::atualizarSaldo));
         game.start();
@@ -117,7 +118,7 @@ public class ViewItemMenu {
             btn.setFont(new Font("Arial", Font.BOLD, 12));
             btn.setFocusPainted(false);
             btn.setBorderPainted(false);
-            btn.setPreferredSize(new Dimension(50, 24));
+            btn.setPreferredSize(new Dimension(70, 32));
             btn.addActionListener(e -> { buyMode[0] = val; updateBuyModeButtons(); });
             buyModeButtons[i] = btn;
             rightTop.add(btn);
@@ -193,12 +194,14 @@ public class ViewItemMenu {
         leftScroll.getViewport().setBackground(BG_MAIN);
         leftScroll.setBorder(null);
         leftScroll.getVerticalScrollBar().setUnitIncrement(16);
+        leftScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         JScrollPane rightScroll = new JScrollPane(rightCol);
         rightScroll.setBackground(BG_MAIN);
         rightScroll.getViewport().setBackground(BG_MAIN);
         rightScroll.setBorder(null);
         rightScroll.getVerticalScrollBar().setUnitIncrement(16);
+        rightScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         JPanel container = new JPanel(new GridLayout(1, 2, 6, 0));
         container.setBackground(BG_MAIN);
