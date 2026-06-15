@@ -47,7 +47,7 @@ public class ViewItemMenu {
 
         janela = new JFrame("Java Tycoon Capital");
         janela.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        janela.setSize(1100, 720);
+        janela.setSize(960, 620);
         janela.setLocationRelativeTo(null);
         janela.getContentPane().setBackground(BG_MAIN);
 
@@ -88,7 +88,7 @@ public class ViewItemMenu {
         JPanel top = new JPanel(new BorderLayout(10, 0));
         top.setBackground(BG_SIDEBAR);
         top.setBorder(BorderFactory.createEmptyBorder(8, 14, 8, 14));
-        top.setPreferredSize(new Dimension(1100, 58));
+        top.setPreferredSize(new Dimension(960, 46));
 
         JPanel leftTop = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0));
         leftTop.setBackground(BG_SIDEBAR);
@@ -96,7 +96,7 @@ public class ViewItemMenu {
         JLabel avatar = hatIcon != null ? new JLabel(hatIcon) : new JLabel("$");
         leftTop.add(avatar);
         labelSaldo = new JLabel("$" + ViewCardShop.formatMoney(user.getMoney()));
-        labelSaldo.setFont(new Font("Arial", Font.BOLD, 40));  
+        labelSaldo.setFont(new Font("Arial", Font.BOLD, 26));
         labelSaldo.setForeground(TXT_GOLD);
         leftTop.add(labelSaldo);
         top.add(leftTop, BorderLayout.WEST);
@@ -117,7 +117,7 @@ public class ViewItemMenu {
             btn.setFont(new Font("Arial", Font.BOLD, 12));
             btn.setFocusPainted(false);
             btn.setBorderPainted(false);
-            btn.setPreferredSize(new Dimension(58, 30));
+            btn.setPreferredSize(new Dimension(50, 24));
             btn.addActionListener(e -> { buyMode[0] = val; updateBuyModeButtons(); });
             buyModeButtons[i] = btn;
             rightTop.add(btn);
@@ -140,7 +140,7 @@ public class ViewItemMenu {
         JPanel sidebar = new JPanel();
         sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
         sidebar.setBackground(BG_SIDEBAR);
-        sidebar.setPreferredSize(new Dimension(155, 720));
+        sidebar.setPreferredSize(new Dimension(140, 620));
         sidebar.setBorder(BorderFactory.createEmptyBorder(12, 8, 12, 8));
 
         JButton gameBtn = makeMenuButton("  Game", "game");
@@ -172,8 +172,8 @@ public class ViewItemMenu {
         btn.setForeground(TXT_CREAM);
         btn.setFocusPainted(false);
         btn.setBorderPainted(false);
-        btn.setMaximumSize(new Dimension(139, 44));
-        btn.setPreferredSize(new Dimension(139, 44));
+        btn.setMaximumSize(new Dimension(124, 36));
+        btn.setPreferredSize(new Dimension(124, 36));
         btn.setAlignmentX(Component.CENTER_ALIGNMENT);
         if (emojiName != null) {
             ImageIcon icon = EmojiIcon.get(emojiName, 18);

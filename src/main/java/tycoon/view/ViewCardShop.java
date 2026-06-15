@@ -51,19 +51,19 @@ public class ViewCardShop extends JPanel {
         setLayout(new BorderLayout(8, 0));
         setBackground(BG_EXPANDED);
         setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(140, 100, 50)));
-        setMaximumSize(new Dimension(Integer.MAX_VALUE, 88));
-        setPreferredSize(new Dimension(800, 88));
-        setMinimumSize(new Dimension(100, 88));
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, 70));
+        setPreferredSize(new Dimension(800, 70));
+        setMinimumSize(new Dimension(100, 70));
 
         JPanel leftPanel = new JPanel();
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         leftPanel.setBackground(new Color(20, 40, 20));
-        leftPanel.setPreferredSize(new Dimension(70, 88));
-        leftPanel.setMinimumSize(new Dimension(70, 88));
+        leftPanel.setPreferredSize(new Dimension(60, 70));
+        leftPanel.setMinimumSize(new Dimension(60, 70));
         leftPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
         leftPanel.setBorder(BorderFactory.createEmptyBorder(8, 4, 8, 4));
 
-        ImageIcon icon = EmojiIcon.get(getEmojiName(), 36);
+        ImageIcon icon = EmojiIcon.get(getEmojiName(), 28);
         JLabel iconLabel = icon != null
                 ? new JLabel(icon, SwingConstants.CENTER)
                 : new JLabel(getEmojiName(), SwingConstants.CENTER);
@@ -158,11 +158,12 @@ public class ViewCardShop extends JPanel {
         setLayout(new BorderLayout(0, 0));
         setBackground(BG_COMPACT);
         setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, new Color(80, 60, 35)));
-        setMaximumSize(new Dimension(Integer.MAX_VALUE, 55));
-        setPreferredSize(new Dimension(800, 55));
-        setMinimumSize(new Dimension(100, 55));
+        setMaximumSize(new Dimension(Integer.MAX_VALUE, 44));
+        setPreferredSize(new Dimension(800, 44));
+        setMinimumSize(new Dimension(100, 44));
 
-        JPanel inner = new JPanel(new BorderLayout(10, 0));
+        JPanel inner = new JPanel();
+        inner.setLayout(new BoxLayout(inner, BoxLayout.X_AXIS));
         inner.setBackground(BG_COMPACT);
         inner.setBorder(BorderFactory.createEmptyBorder(6, 12, 6, 10));
 
@@ -174,7 +175,10 @@ public class ViewCardShop extends JPanel {
         nameLabel.setFont(new Font("Arial", Font.BOLD, 12));
         nameLabel.setForeground(TXT_CREAM);
         namePanel.add(nameLabel);
-        inner.add(namePanel, BorderLayout.WEST);
+        namePanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        inner.add(namePanel);
+
+        inner.add(Box.createRigidArea(new Dimension(16, 0)));
 
         btnCompactBuy = new JButton("$" + formatMoney(item.getPrecoCompra()));
         btnCompactBuy.setFont(new Font("Arial", Font.BOLD, 11));
@@ -182,9 +186,13 @@ public class ViewCardShop extends JPanel {
         btnCompactBuy.setBackground(BTN_BUY);
         btnCompactBuy.setFocusPainted(false);
         btnCompactBuy.setBorderPainted(false);
-        btnCompactBuy.setPreferredSize(new Dimension(120, 30));
+        btnCompactBuy.setPreferredSize(new Dimension(110, 26));
+        btnCompactBuy.setMaximumSize(new Dimension(110, 26));
+        btnCompactBuy.setAlignmentY(Component.CENTER_ALIGNMENT);
         btnCompactBuy.addActionListener(e -> comprar());
-        inner.add(btnCompactBuy, BorderLayout.EAST);
+        inner.add(btnCompactBuy);
+
+        inner.add(Box.createHorizontalGlue());
 
         add(inner, BorderLayout.CENTER);
 
